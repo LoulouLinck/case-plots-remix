@@ -1,7 +1,7 @@
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
-import { PlotsList } from "~/components/PlotsList"; // Import PlotsList component
+import  PlotsList from "../components/land-plot-list/land-plot-list"; // Import PlotsList component
 import { plots, type Plot } from "~/data/plots";
 
 // 1. Meta Function:
