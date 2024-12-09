@@ -2,14 +2,11 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "**/.server/**/*.ts",
-    "**/.server/**/*.tsx",
-    "**/.client/**/*.ts",
-    "**/.client/**/*.tsx"
+    "app/components/**/*",  // Added to include components (Plot, Plotslist, App)
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@remix-run/node", "vite/client"],
+    "types": ["@remix-run/node", "vite/client", "react", "react-dom"],  // Ensure React types are included
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
