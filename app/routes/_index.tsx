@@ -10,10 +10,11 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+// Loader Function: handles filtering based on query parameters for price and location.
 export const loader: LoaderFunction = async ({ request }) => {
-  const url = new URL(request.url);
-  const minPrice = url.searchParams.get("minPrice");
-  const maxPrice = url.searchParams.get("maxPrice");
+  const url = new URL(request.url); // Parse the URL to get query parameters.
+  const minPrice = url.searchParams.get("minPrice"); // Get minimum price filter value.
+  const maxPrice = url.searchParams.get("maxPrice"); // Get maximum price filter value.
   const location = url.searchParams.get("location"); // Extend filtering logic to location.
 
    // Start with the full dataset of plots.
@@ -25,7 +26,7 @@ export const loader: LoaderFunction = async ({ request }) => {
       (plot) => plot.price >= parseInt(minPrice)
     );
   }
-
+// Apply maximum price filter if a value is provided.
   if (maxPrice) {
     filteredPlots = filteredPlots.filter(
       (plot) => plot.price <= parseInt(maxPrice)
@@ -38,24 +39,29 @@ export const loader: LoaderFunction = async ({ request }) => {
       (plot) => plot.location.toLowerCase().includes(location.toLowerCase())
     );
   }
+// Return the filtered plots as JSON to be used by the component.
   return json({ plots: filteredPlots });
 };
 
+// Main Index Component
 export default function Index() {
-  const { plots } = useLoaderData<{ plots: Plot[] }>();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { plots } = useLoaderData<{ plots: Plot[] }>(); // Load the filtered plots data.
+  const [searchParams, setSearchParams] = useSearchParams(); // Manage URL search parameters.
 
+  // Handles changes in filter input fields and updates the URL query parameters.
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const params = new URLSearchParams(searchParams);
+    const { name, value } = e.target; // Extract the input field's name and value.
+    const params = new URLSearchParams(searchParams); // Create a new URLSearchParams object.
     
+     // If the input value is not empty, set it in the URL parameters.
     if (value) {
       params.set(name, value);
     } else {
+       // If the input value is empty, remove it from the URL parameters.
       params.delete(name);
     }
     
-    setSearchParams(params);
+    setSearchParams(params); // Update the URL with the new parameters.
   };
 
   return (
