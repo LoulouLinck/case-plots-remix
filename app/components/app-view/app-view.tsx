@@ -10,10 +10,15 @@ const App: React.FC = () => {
   return (
     // Wrapper div for 'App' component.
     // To be used a parent layout/styling wrapper for entire page.
-    <div className="app">
-      
-   {/* // App heading */}
-      <h1>Land Plots</h1>
+    <div className="app min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8"> 
+         
+         {/* // App heading */}
+      <div className="max-w-7xl mx-auto">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+        Land Plots
+        </h1>
+      </div>
+
 
       {/*
         Render PlotsList component inside App component.

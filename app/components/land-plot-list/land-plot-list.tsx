@@ -17,7 +17,7 @@ interface PlotsListProps {
 const PlotsList: React.FC<PlotsListProps> = ({ plots }) => {
   return (
     // Wrapper div for list of plots.
-    <div className="plots-list">
+    <div className="plots-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {/*
         'map' method iterates over 'plots' array passed as a prop.
         For each 'plot' object in the array:
