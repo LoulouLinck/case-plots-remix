@@ -75,6 +75,7 @@ export default function Index() {
                 type="number"
                 id="minPrice"
                 name="minPrice"
+                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("minPrice") || ""}
                 onChange={handleFilterChange}
               />
@@ -87,6 +88,7 @@ export default function Index() {
                 type="number"
                 id="maxPrice"
                 name="maxPrice"
+                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("maxPrice") || ""}
                 onChange={handleFilterChange}
               />
