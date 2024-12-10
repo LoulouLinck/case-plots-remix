@@ -14,9 +14,12 @@ export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
   const minPrice = url.searchParams.get("minPrice");
   const maxPrice = url.searchParams.get("maxPrice");
+  const location = url.searchParams.get("location"); // Extend filtering logic to location.
 
+   // Start with the full dataset of plots.
   let filteredPlots = [...plots];
 
+  // Apply minimum price filter if a value is provided.
   if (minPrice) {
     filteredPlots = filteredPlots.filter(
       (plot) => plot.price >= parseInt(minPrice)
@@ -28,7 +31,13 @@ export const loader: LoaderFunction = async ({ request }) => {
       (plot) => plot.price <= parseInt(maxPrice)
     );
   }
-
+ // Apply location filter if a value is provided.
+  // Convert both location and query to lowercase to ensure case-insensitive matching.
+  if (location) {
+    filteredPlots = filteredPlots.filter(
+      (plot) => plot.location.toLowerCase().includes(location.toLowerCase())
+    );
+  }
   return json({ plots: filteredPlots });
 };
 
@@ -84,6 +93,19 @@ export default function Index() {
                 onChange={handleFilterChange}
               />
             </div>
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+               Location
+             </label>
+             <input
+                type="text"
+                id="location"
+                name="location"
+                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                value={searchParams.get("location") || ""}
+                onChange={handleFilterChange}
+              />
+           </div>
           </div>
         </div>
 
