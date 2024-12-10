@@ -1,12 +1,16 @@
+// Define the structure of a Plot object using an interface: ensures all plot objects follow same structure.
+// Plot interface will be imported and defined as 'PlotType' in other files: avoids confusion w/ 'Plot' component.
 export interface Plot {
-  id: string;
-  title: string;
-  size: number; // in square meters
-  price: number;
-  location: string;
-  description: string;
+  id: string;          // Unique identifier for the plot
+  title: string;       // The title or name of the plot
+  size: number;        // The size of the plot in square meters
+  price: number;       // The price of the plot in USD
+  location: string;    // Geographic location of the plot
+  description: string; // A detailed description of the plot
 }
 
+// Export an array of plots, each following the Plot interface structure.
+// These plots will serve as mock data for rendering components.
 export const plots: Plot[] = [
   {
     id: "1",
@@ -48,4 +52,4 @@ export const plots: Plot[] = [
     location: "Eifel, Rheinland-Pfalz",
     description: "Artenreiches Grünland mit Quellgebieten und Schmetterlingshabitaten",
   },
-]; 
+];
