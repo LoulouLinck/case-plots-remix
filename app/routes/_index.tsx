@@ -12,6 +12,7 @@ export const meta: MetaFunction = () => {
 
 // Loader Function: handles filtering based on query parameters for price and location.
 export const loader: LoaderFunction = async ({ request }) => {
+  // Extract query parameters from the request URL
   const url = new URL(request.url); // Parse the URL to get query parameters.
   const minPrice = url.searchParams.get("minPrice"); // Get minimum price filter value.
   const maxPrice = url.searchParams.get("maxPrice"); // Get maximum price filter value.
@@ -20,26 +21,35 @@ export const loader: LoaderFunction = async ({ request }) => {
    // Start with the full dataset of plots.
   let filteredPlots = [...plots];
 
-  // Apply minimum price filter if a value is provided.
+   // Filter by minimum price if provided
   if (minPrice) {
     filteredPlots = filteredPlots.filter(
       (plot) => plot.price >= parseInt(minPrice)
     );
   }
-// Apply maximum price filter if a value is provided.
+   // Filter by maximum price if provided
   if (maxPrice) {
     filteredPlots = filteredPlots.filter(
       (plot) => plot.price <= parseInt(maxPrice)
     );
   }
- // Apply location filter if a value is provided.
-  // Convert both location and query to lowercase to ensure case-insensitive matching.
-  if (location) {
-    filteredPlots = filteredPlots.filter(
-      (plot) => plot.location.toLowerCase().includes(location.toLowerCase())
+   // Filter by location if location query parameter is provided.
+   // Convert both location and query to lowercase for case-insensitive matching.
+   if (location) {
+    // Function normalising strings
+    // Removes diacritical marks (ä, ü) and converts string to lowercase.
+    const normalizeString = (str: string) =>
+      str
+        .normalize("NFD") // Decompose characters with diacritics (ä = a + diacritic)
+        .replace(/[\u0300-\u036f]/g, "") // Remove diacritical marks (a + diacritic = a)
+        .toLowerCase(); // Convert string to lowercase
+
+    // Filter plots where normalised location value includes normalised input value.
+    filteredPlots = filteredPlots.filter((plot) =>
+      normalizeString(plot.location).includes(normalizeString(location))
     );
   }
-// Return the filtered plots as JSON to be used by the component.
+ // Return filtered plots as JSON used by component.
   return json({ plots: filteredPlots });
 };
 
@@ -71,7 +81,7 @@ export default function Index() {
         
         {/* Price Filter Section */}
         <div className="mb-6 bg-white p-4 rounded-lg shadow-sm">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Filter by Price</h2>
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Filter by Price & Location</h2>
           <div className="flex gap-4">
             <div>
               <label htmlFor="minPrice" className="block text-sm font-medium text-gray-700">
