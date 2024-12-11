@@ -1,3 +1,4 @@
+import { useState } from "react"; // Import useState hook.
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
@@ -58,6 +59,11 @@ export default function Index() {
   const { plots } = useLoaderData<{ plots: Plot[] }>(); // Load the filtered plots data.
   const [searchParams, setSearchParams] = useSearchParams(); // Manage URL search parameters.
 
+  // Currency state: default to USD
+  const [currency, setCurrency] = useState<"USD" | "EUR">("USD");
+  // Conversion rate from USD to EUR
+  const conversionRate = 0.93;
+
   // Handles changes in filter input fields and updates the URL query parameters.
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target; // Extract the input field's name and value.
@@ -74,10 +80,25 @@ export default function Index() {
     setSearchParams(params); // Update the URL with the new parameters.
   };
 
+    // Handles currency toggle
+    const handleCurrencyToggle = () => {
+      setCurrency((prev) => (prev === "USD" ? "EUR" : "USD"));
+    };
+
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Available Plots</h1>
+
+         {/* Currency Toggle */}
+         <div className="flex justify-end mb-6">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600"
+            onClick={handleCurrencyToggle}
+          >
+            Switch to {currency === "USD" ? "EUR" : "USD"}
+          </button>
+        </div>
         
         {/* Price Filter Section */}
         <div className="mb-6 bg-white p-4 rounded-lg shadow-sm">
@@ -85,7 +106,7 @@ export default function Index() {
           <div className="flex gap-4">
             <div>
               <label htmlFor="minPrice" className="block text-sm font-medium text-gray-700">
-                Min Price ($)
+                Min Price ({currency})
               </label>
               <input
                 type="number"
@@ -98,7 +119,7 @@ export default function Index() {
             </div>
             <div>
               <label htmlFor="maxPrice" className="block text-sm font-medium text-gray-700">
-                Max Price ($)
+                Max Price ({currency})
               </label>
               <input
                 type="number"
@@ -144,8 +165,10 @@ export default function Index() {
                     <span className="font-medium">Size:</span> {plot.size} m²
                   </p>
                   <p className="text-gray-700">
-                    <span className="font-medium">Price:</span> $
-                    {plot.price.toLocaleString()}
+                    <span className="font-medium">Price:</span> {" "}
+                    {currency === "USD"
+                      ? `$${plot.price.toLocaleString()}`
+                      : `€${(plot.price * conversionRate).toLocaleString()}`}
                   </p>
                 </div>
               </div>
