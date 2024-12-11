@@ -13,9 +13,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     // Backdrop for the modal: covers the entire screen
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={onClose} // Close the modal when the backdrop is clicked
+    >
       {/* Modal container for content */}
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
+      <div
+        className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative"
+        onClick={(e) => e.stopPropagation()} // Prevent click events from bubbling to the backdrop
+      >
         {/* Close button */}
         <button
           className="absolute top-2 right-2 text-gray-600 hover:text-black"
