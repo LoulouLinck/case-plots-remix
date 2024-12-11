@@ -1,8 +1,6 @@
 // The 'PlotsList' component handles the rendering of a collection of plots.
 // Individual plot rendering is delegated to the Plot component.
 
-import React from "react";
-import { Link } from "@remix-run/react"; // Import the Link component for navigation
 import React, { useState } from "react";
 import Plot from "../land-plot/land-plot"; // Import Plot component
 import Modal from "../modal"; // Import Modal component for displaying plot details in a modal
@@ -36,20 +34,6 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots }) => {
   };
 
   return (
-    // Wrapper div for list of plots.
-    <div className="plots-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {/*
-        'map' method iterates over 'plots' array passed as a prop.
-        For each 'plot' object in the array:
-        - A 'Plot' component is rendered.
-        - 'key' prop ensures efficient update and tracking of items in list.
-        - 'plot' object passed to 'Plot' component as prop to render its details.
-      */}
-      {plots.map((plot) => (
-        <Link key={plot.id} to={`/plots/${plot.id}`}>
-          <Plot plot={plot} />
-        </Link>
-      ))}
     <div>
       {/* Wrapper div for list of plots */}
       <div className="plots-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -76,3 +60,20 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots }) => {
 };
 
 export default PlotsList;
+
+      {/*
+        ---------------------- Dynamic Routing Code Reference ----------------------
+        The below section demonstrates an alternative approach using dynamic routing.
+        Uncomment and adjust if dynamic routing is required instead of modals.
+
+        <div className="plots-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {plots.map((plot) => (
+            <div key={plot.id}>
+              <Link to={`/plots/${plot.id}`}> 
+                {/* Ensure this matches the dynamic route */}
+        //         <Plot plot={plot} />
+        //       </Link>
+        //     </div>
+        //   ))}
+        // </div>
+      
