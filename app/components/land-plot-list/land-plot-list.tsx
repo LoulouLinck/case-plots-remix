@@ -2,6 +2,7 @@
 // Individual plot rendering is delegated to the Plot component.
 
 import React from "react";
+import { Link } from "@remix-run/react"; // Import the Link component for navigation
 import Plot from "../land-plot/land-plot"; // Import Plot component
 import { Plot as PlotType } from "~/data/plots"; // Ensure correct type is imported: from data stored in plots.ts
 
@@ -26,7 +27,9 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots }) => {
         - 'plot' object passed to 'Plot' component as prop to render its details.
       */}
       {plots.map((plot) => (
-        <Plot key={plot.id} plot={plot} />
+        <Link key={plot.id} to={`/plots/${plot.id}`}>
+          <Plot plot={plot} />
+        </Link>
       ))}
     </div>
   );
