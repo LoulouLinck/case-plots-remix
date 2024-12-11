@@ -9,7 +9,7 @@ interface PlotDetailsProps {
     price: number;
     location: string;
     description: string;
-    project: string[]; // Additional data, like special project type
+    projectType: string[]; // Additional data, like special project type
     owner: string; // Name of the owner
     contact: string; // Contact information
   };
@@ -26,7 +26,7 @@ const PlotDetails: React.FC<PlotDetailsProps> = ({ plot }) => {
       <p><strong>Contact:</strong> {plot.contact}</p>
       <h2 className="text-xl font-semibold mt-4">Project type:</h2>
       <ul className="list-disc list-inside">
-        {plot.project.map((feature, index) => (
+        {plot.projectType.map((feature, index) => (
           <li key={index}>{feature}</li>
         ))}
       </ul>
