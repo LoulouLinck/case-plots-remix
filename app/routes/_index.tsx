@@ -138,6 +138,7 @@ export default function Index() {
         {/* 9. Price and Location Filter Inputs:
             - Allows users to filter plots by price and location.
             - Updates search parameters using the handleFilterChange function.
+            - Includes sliders for quick price selection in addition to numeric input.
         */}
         <div className="mb-6 bg-white p-4 rounded-lg shadow-sm">
           <h2 className="text-lg font-medium text-gray-900 mb-4">Filter by Price & Location</h2>
@@ -150,9 +151,21 @@ export default function Index() {
                 type="number"
                 id="minPrice"
                 name="minPrice"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("minPrice") || ""}
                 onChange={handleFilterChange}
+              />
+              {/* Slider for Min Price */}
+              <input
+                type="range"
+                id="minPriceSlider"
+                name="minPrice"
+                min="0"
+                max="1000000"
+                step="10000"
+                value={searchParams.get("minPrice") || "0"}
+                onChange={handleFilterChange}
+                className="mt-2 w-full"
               />
             </div>
             <div>
@@ -166,6 +179,18 @@ export default function Index() {
                 className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("maxPrice") || ""}
                 onChange={handleFilterChange}
+              />
+              {/* Slider for Max Price */}
+              <input
+                type="range"
+                id="maxPriceSlider"
+                name="maxPrice"
+                min="0"
+                max="1000000"
+                step="10000"
+                value={searchParams.get("maxPrice") || "1000000"}
+                onChange={handleFilterChange}
+                className="mt-2 w-full"
               />
             </div>
             <div>
