@@ -15,27 +15,40 @@ export const meta: MetaFunction = () => {
 };
 
 // 2. Loader Function:
-// Retrieves filtered plot data based on query parameters (minPrice, maxPrice, and location).
-// Filters the plots from the dataset and returns them for use in the component.
+// Retrieves filtered plot data based on query parameters (minPrice, maxPrice, location, and currency).
+// Filters the plots from the dataset and dynamically converts prices based on currency.
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url); // Parse the URL to get query parameters.
   const minPrice = url.searchParams.get("minPrice"); // Get minimum price filter value.
   const maxPrice = url.searchParams.get("maxPrice"); // Get maximum price filter value.
   const location = url.searchParams.get("location"); // Get location filter value.
+  const currency = url.searchParams.get("currency") || "USD"; // Default currency is USD.
 
-  let filteredPlots = [...plots]; // Start with the full dataset of plots.
+  const conversionRate = 0.9524; // Conversion rate from USD to EUR.
 
-  // Filter by minimum price if provided
+  // Define a function to convert USD prices to the selected currency.
+  const convertToCurrency = (priceInUSD: number) =>
+    currency === "EUR" ? priceInUSD * conversionRate : priceInUSD;
+
+  // Preprocess plots to include converted prices based on the selected currency.
+  let filteredPlots = plots.map((plot) => ({
+    ...plot,
+    convertedPrice: convertToCurrency(plot.price),
+  }));
+
+  // Filter by minimum price in the selected currency.
   if (minPrice) {
+    const minPriceValue = parseFloat(minPrice);
     filteredPlots = filteredPlots.filter(
-      (plot) => plot.price >= parseInt(minPrice)
+      (plot) => plot.convertedPrice >= minPriceValue
     );
   }
 
-  // Filter by maximum price if provided
+  // Filter by maximum price in the selected currency.
   if (maxPrice) {
+    const maxPriceValue = parseFloat(maxPrice);
     filteredPlots = filteredPlots.filter(
-      (plot) => plot.price <= parseInt(maxPrice)
+      (plot) => plot.convertedPrice <= maxPriceValue
     );
   }
 
@@ -85,13 +98,22 @@ export default function Index() {
       params.delete(name);
     }
 
+    // Ensure the current currency is reflected in the query params.
+    params.set("currency", currency);
+
     setSearchParams(params); // Update the URL search parameters.
   };
 
   // 7. Currency Toggle Function:
   // Switches the currency state between USD and EUR when triggered.
+  // Updates the URL to include the selected currency.
   const handleCurrencyToggle = () => {
-    setCurrency((prev) => (prev === "USD" ? "EUR" : "USD"));
+    const newCurrency = currency === "USD" ? "EUR" : "USD";
+    setCurrency(newCurrency);
+
+    const params = new URLSearchParams(searchParams);
+    params.set("currency", newCurrency);
+    setSearchParams(params); // Reflect the new currency in the query params.
   };
 
   return (
@@ -141,13 +163,13 @@ export default function Index() {
                 type="number"
                 id="maxPrice"
                 name="maxPrice"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("maxPrice") || ""}
                 onChange={handleFilterChange}
               />
             </div>
             <div>
-              <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="location" className="text-gray-800 block text-sm font-medium text-gray-700">
                 Location
               </label>
               <input
