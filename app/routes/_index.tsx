@@ -165,8 +165,8 @@ export default function Index() {
                 id="minPriceSlider"
                 name="minPrice"
                 min="0"
-                max="1000000"
-                step="10000"
+                max="200000"
+                step="1000"
                 value={searchParams.get("minPrice") || "0"}
                 onChange={handleFilterChange}
                 className="mt-2 w-full"
@@ -194,8 +194,8 @@ export default function Index() {
                 id="maxPriceSlider"
                 name="maxPrice"
                 min="0"
-                max="1000000"
-                step="10000"
+                max="200000"
+                step="1000"
                 value={searchParams.get("maxPrice") || "1000000"}
                 onChange={handleFilterChange}
                 className="mt-2 w-full"
@@ -213,8 +213,8 @@ export default function Index() {
                 className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("location") || ""}
                 onInput={(e) => {
-                  // Restrict to alphabetical input
-                  e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s]/g, "");
+                  // Restrict to alphabetical input, including German special characters and spaces
+                  e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
                 }}
                 onChange={handleFilterChange}
               />
