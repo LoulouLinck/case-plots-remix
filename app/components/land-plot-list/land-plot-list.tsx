@@ -10,13 +10,19 @@ import { Plot as PlotType } from "~/data/plots"; // Ensure correct type is impor
 // Interface for Props: 
 // - Defines what PlotsList component expects to receive.
 // - Enforces type safety, requiring 'plots' prop to match structure defined in plots.ts.
+// - Adds 'currency' and 'conversionRate' props to handle dynamic pricing display.
 interface PlotsListProps {
   plots: PlotType[]; // Define the expected prop type as an array of Plot objects.
+  currency: "USD" | "EUR"; // Current currency ("USD" or "EUR").
+  conversionRate: number; // Conversion rate from USD to EUR.
 }
 
 // Define PlotsList component.
-// Uses PlotsListProps interface to have it accept a 'plots' prop: an array of Plot objects.
-const PlotsList: React.FC<PlotsListProps> = ({ plots }) => {
+// Uses PlotsListProps interface to have it accept:
+// - 'plots': an array of Plot objects.
+// - 'currency': a string indicating the selected currency (default USD).
+// - 'conversionRate': a number to calculate the price in EUR if selected.
+const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }) => {
   // State to track selected plot for the modal
   const [selectedPlot, setSelectedPlot] = useState<PlotType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,10 +49,11 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots }) => {
           - A 'Plot' component is rendered.
           - 'key' prop ensures efficient update and tracking of items in list.
           - 'plot' object passed to 'Plot' component as prop to render its details.
+          - Currency and conversion rate are passed to Plot for dynamic pricing.
         */}
         {plots.map((plot) => (
           <div key={plot.id} onClick={() => openModal(plot)}>
-            <Plot plot={plot} />
+            <Plot plot={plot} currency={currency} conversionRate={conversionRate} />
           </div>
         ))}
       </div>

@@ -54,7 +54,7 @@ export default function Index() {
 
   // 6. Conversion Rate:
   // Define the conversion rate from USD to EUR.
-  const conversionRate = 0.93;
+  const conversionRate = 0.9524;
 
   // Updates the query parameters based on user input in the filter fields.
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
