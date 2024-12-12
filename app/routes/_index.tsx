@@ -15,37 +15,55 @@ export const meta: MetaFunction = () => {
 };
 
 // 2. Loader Function:
-// Retrieves filtered plot data based on query parameters (minPrice, maxPrice).
+// Retrieves filtered plot data based on query parameters (minPrice, maxPrice, and location).
 // Filters the plots from the dataset and returns them for use in the component.
 export const loader: LoaderFunction = async ({ request }) => {
-  const url = new URL(request.url);
-  const minPrice = url.searchParams.get("minPrice");
-  const maxPrice = url.searchParams.get("maxPrice");
+  const url = new URL(request.url); // Parse the URL to get query parameters.
+  const minPrice = url.searchParams.get("minPrice"); // Get minimum price filter value.
+  const maxPrice = url.searchParams.get("maxPrice"); // Get maximum price filter value.
+  const location = url.searchParams.get("location"); // Get location filter value.
 
-  let filteredPlots = [...plots];
+  let filteredPlots = [...plots]; // Start with the full dataset of plots.
 
+  // Filter by minimum price if provided
   if (minPrice) {
     filteredPlots = filteredPlots.filter(
       (plot) => plot.price >= parseInt(minPrice)
     );
   }
 
+  // Filter by maximum price if provided
   if (maxPrice) {
     filteredPlots = filteredPlots.filter(
       (plot) => plot.price <= parseInt(maxPrice)
     );
   }
 
-  return json({ plots: filteredPlots });
+  // Filter by location if location query parameter is provided.
+  // Convert both location and query to lowercase for case-insensitive matching.
+  if (location) {
+    const normalizeString = (str: string) =>
+      str
+        .normalize("NFD") // Decompose characters with diacritics (ä = a + diacritic)
+        .replace(/[\u0300-\u036f]/g, "") // Remove diacritical marks (a + diacritic = a)
+        .toLowerCase(); // Convert string to lowercase
+
+    filteredPlots = filteredPlots.filter((plot) =>
+      normalizeString(plot.location).includes(normalizeString(location))
+    );
+  }
+
+  return json({ plots: filteredPlots }); // Return filtered plots as JSON used by the component.
 };
 
+// Main Index Component
 export default function Index() {
   // 3. useLoaderData:
   // Fetches data returned by the loader function, specifically the filtered plots.
   const { plots } = useLoaderData<{ plots: Plot[] }>();
 
   // 4. useSearchParams:
-  // Enables managing URL search parameters for price filtering dynamically.
+  // Enables managing URL search parameters for price and location filtering dynamically.
   const [searchParams, setSearchParams] = useSearchParams();
 
   // 5. useState for Currency Toggle:
@@ -67,7 +85,7 @@ export default function Index() {
       params.delete(name);
     }
 
-    setSearchParams(params);
+    setSearchParams(params); // Update the URL search parameters.
   };
 
   // 7. Currency Toggle Function:
@@ -95,12 +113,12 @@ export default function Index() {
           </button>
         </div>
 
-        {/* 9. Price Filter Inputs:
-            - Allows users to filter plots by price.
+        {/* 9. Price and Location Filter Inputs:
+            - Allows users to filter plots by price and location.
             - Updates search parameters using the handleFilterChange function.
         */}
         <div className="mb-6 bg-white p-4 rounded-lg shadow-sm">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Filter by Price</h2>
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Filter by Price & Location</h2>
           <div className="flex gap-4">
             <div>
               <label htmlFor="minPrice" className="block text-sm font-medium text-gray-700">
@@ -125,6 +143,19 @@ export default function Index() {
                 name="maxPrice"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("maxPrice") || ""}
+                onChange={handleFilterChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+                Location
+              </label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                value={searchParams.get("location") || ""}
                 onChange={handleFilterChange}
               />
             </div>
