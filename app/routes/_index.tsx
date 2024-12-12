@@ -1,8 +1,9 @@
+import { useState } from "react"; // Import useState hook.
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
-import  PlotsList from "../components/land-plot-list/land-plot-list"; // Import PlotsList component
-import { plots, type Plot } from "~/data/plots";
+import PlotsList from "../components/land-plot-list/land-plot-list"; // Import PlotsList component
+import { plots, type Plot } from "~/data/plots"; // Import the plots data
 
 // 1. Meta Function:
 // Provides metadata for the route, setting the title and description.
@@ -47,6 +48,14 @@ export default function Index() {
   // Enables managing URL search parameters for price filtering dynamically.
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // 5. useState for Currency Toggle:
+  // Handles the currency state, defaulting to "USD".
+  const [currency, setCurrency] = useState<"USD" | "EUR">("USD");
+
+  // 6. Conversion Rate:
+  // Define the conversion rate from USD to EUR.
+  const conversionRate = 0.93;
+
   // Updates the query parameters based on user input in the filter fields.
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -61,13 +70,32 @@ export default function Index() {
     setSearchParams(params);
   };
 
+  // 7. Currency Toggle Function:
+  // Switches the currency state between USD and EUR when triggered.
+  const handleCurrencyToggle = () => {
+    setCurrency((prev) => (prev === "USD" ? "EUR" : "USD"));
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Available Plots</h1>
 
-        {/* 5. Price Filter Inputs:
+        {/* 8. Currency Toggle Section:
+            - Adds a toggle button for switching between USD and EUR.
+            - Displays the next currency to switch to.
+        */}
+        <div className="flex justify-end mb-6">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600"
+            onClick={handleCurrencyToggle}
+          >
+            Switch to {currency === "USD" ? "EUR" : "USD"}
+          </button>
+        </div>
+
+        {/* 9. Price Filter Inputs:
             - Allows users to filter plots by price.
             - Updates search parameters using the handleFilterChange function.
         */}
@@ -76,7 +104,7 @@ export default function Index() {
           <div className="flex gap-4">
             <div>
               <label htmlFor="minPrice" className="block text-sm font-medium text-gray-700">
-                Min Price ($)
+                Min Price ({currency})
               </label>
               <input
                 type="number"
@@ -89,7 +117,7 @@ export default function Index() {
             </div>
             <div>
               <label htmlFor="maxPrice" className="block text-sm font-medium text-gray-700">
-                Max Price ($)
+                Max Price ({currency})
               </label>
               <input
                 type="number"
@@ -103,11 +131,11 @@ export default function Index() {
           </div>
         </div>
 
-        {/* 6. PlotsList Integration:
-            - Passes filtered plots as a prop to the PlotsList component.
-            - The PlotsList handles the rendering of individual plots using the Plot component.
+        {/* 10. PlotsList Integration:
+            - Passes filtered plots and currency details as props to the PlotsList component.
+            - PlotsList renders the individual plots with currency-specific prices.
         */}
-        <PlotsList plots={plots} />
+        <PlotsList plots={plots} currency={currency} conversionRate={conversionRate} />
       </div>
     </div>
   );
