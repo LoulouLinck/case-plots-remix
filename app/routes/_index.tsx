@@ -153,6 +153,10 @@ export default function Index() {
                 name="minPrice"
                 className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("minPrice") || ""}
+                onInput={(e) => {
+                  // Restrict to numerical input
+                  e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
+                }}
                 onChange={handleFilterChange}
               />
               {/* Slider for Min Price */}
@@ -178,6 +182,10 @@ export default function Index() {
                 name="maxPrice"
                 className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("maxPrice") || ""}
+                onInput={(e) => {
+                  // Restrict to numerical input
+                  e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
+                }}
                 onChange={handleFilterChange}
               />
               {/* Slider for Max Price */}
@@ -193,6 +201,7 @@ export default function Index() {
                 className="mt-2 w-full"
               />
             </div>
+            
             <div>
               <label htmlFor="location" className="text-gray-800 block text-sm font-medium text-gray-700">
                 Location
@@ -203,6 +212,10 @@ export default function Index() {
                 name="location"
                 className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("location") || ""}
+                onInput={(e) => {
+                  // Restrict to alphabetical input
+                  e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s]/g, "");
+                }}
                 onChange={handleFilterChange}
               />
             </div>
