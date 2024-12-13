@@ -26,6 +26,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         <button
           className="absolute top-2 right-2 text-green-600 dark:text-darkGreen-100 hover:text-black dark:hover:text-darkGreen-200"
           onClick={onClose} // Calls the onClose function to close the modal
+          style={{
+            fontSize: "30px", // Increases the size of the cross symbol
+            lineHeight: "1", // Ensures the button doesn't stretch vertically
+          }}
         >
           ✖ {/* Cross symbol to indicate "close" */}
         </button>

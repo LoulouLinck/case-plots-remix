@@ -28,7 +28,7 @@ const Plot: React.FC<PlotProps> = ({ plot, currency, conversionRate }) => {
 
   return (
     // Applying the card styling logic for the plot component
-    <div className="card bg-greenAccount-daylightCard text-greenAccount-daylightText dark:bg-greenAccount-darkCard dark:text-greenAccount-darkText rounded-lg shadow-sm p-4 hover:shadow-lg">
+    <div className="card bg-greenAccount-daylightCard bg-greenAccount-daylightCard dark:bg-greenAccount-darkCard dark:text-greenAccount-darkText rounded-lg shadow-sm p-4 hover:shadow-lg">
       <h2 className="text-xl sm:text-2xl py-4 sm:py-6 font-sans font-semibold text-greenAccount-daylightText dark:text-greenAccount-darkText">
         {plot.title}
       </h2>

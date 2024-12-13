@@ -22,9 +22,9 @@ export const plots: Plot[] = [
     price: 175000,
     location: "Schwarzwald, Baden-Württemberg",
     description: "Waldgrundstück mit hoher Artenvielfalt und altem Baumbestand",
-    projectType: ["Nature Conservation", "Forest Restoration"], // Example project types
-    owner: "Max Mustermann", // Example owner
-    contact: "max@mustermann.com", // Example contact info
+    projectType: ["Naturschutz", "Wiederaufforstung"], // Translated project types
+    owner: "Max Mustermann",
+    contact: "max@mustermann.com",
   },
   {
     id: "2",
@@ -33,7 +33,7 @@ export const plots: Plot[] = [
     price: 145000,
     location: "Lüneburger Heide, Niedersachsen",
     description: "Heidefläche mit seltenen Pflanzenarten und Insektenpopulationen",
-    projectType: ["Habitat Restoration", "Biodiversity Preservation"],
+    projectType: ["Renaturierung von Lebensräumen", "Erhalt der Biodiversität"],
     owner: "Sabine Schmidt",
     contact: "sabine@schmidt.com",
   },
@@ -44,7 +44,7 @@ export const plots: Plot[] = [
     price: 160000,
     location: "Spreewald, Brandenburg",
     description: "Naturbelassenes Feuchtgebiet mit reichem Vogelvorkommen",
-    projectType: ["Wetland Preservation", "Wildlife Habitat"],
+    projectType: ["Erhalt von Feuchtgebieten", "Lebensraum für Wildtiere"],
     owner: "Jürgen Müller",
     contact: "juergen@mueller.com",
   },
@@ -55,7 +55,7 @@ export const plots: Plot[] = [
     price: 190000,
     location: "Allgäu, Bayern",
     description: "Traditionelle Streuobstwiese mit alten Obstsorten und Wildblumen",
-    projectType: ["Cultural Heritage", "Fruit Orchard Restoration"],
+    projectType: ["Kulturerbe", "Wiederherstellung von Obstgärten"],
     owner: "Anna Weber",
     contact: "anna@weber.com",
   },
@@ -66,7 +66,7 @@ export const plots: Plot[] = [
     price: 168000,
     location: "Eifel, Rheinland-Pfalz",
     description: "Artenreiches Grünland mit Quellgebieten und Schmetterlingshabitaten",
-    projectType: ["Conservation Area", "Wildlife Protection"],
+    projectType: ["Naturschutzgebiet", "Schutz von Wildtieren"],
     owner: "Oliver Klein",
     contact: "oliver@klein.com",
   },
