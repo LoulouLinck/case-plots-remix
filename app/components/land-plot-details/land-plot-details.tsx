@@ -1,4 +1,3 @@
-
 import React from "react";
 
 interface PlotDetailsProps {
@@ -17,7 +16,8 @@ interface PlotDetailsProps {
 
 const PlotDetails: React.FC<PlotDetailsProps> = ({ plot }) => {
   return (
-    <div className="plot-details card bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+    // Using defined classes for daylight and dark modes
+    <div className="plot-details card bg-greenAccount-daylightCard text-greenAccount-daylightText dark:bg-greenAccount-darkCard dark:text-greenAccount-darkText rounded-lg shadow p-6">
       <h1 className="text-3xl font-bold mb-4">{plot.title}</h1>
       <p><strong>Location:</strong> {plot.location}</p>
       <p><strong>Size:</strong> {plot.size} m²</p>

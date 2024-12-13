@@ -117,19 +117,22 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-greenAccount-daylightBg text-greenAccount-daylightText py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+       
         {/* Header Section */}
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Available Plots</h1>
-
-        {/* 8. Currency Toggle Section:
+        <h1 className="text-3xl font-bold mb-8">
+         <span className="text-[rgb(124,165,25)]">Available </span> 
+         <span className="text-[#f1ecd1]">Plots</span>
+       </h1>
+    
+     {/* 8. Currency Toggle Section:
             - Adds a toggle button for switching between USD and EUR.
             - Displays the next currency to switch to.
         */}
         <div className="flex justify-end mb-6">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600"
-            onClick={handleCurrencyToggle}
+            className="bg-[#95c11f] text-white px-[1.25rem] py-[0.6rem] rounded-tl-[1rem] rounded-tr-[0.25rem] rounded-bl-[0.25rem] rounded-br-[1rem] shadow hover:bg-[#7ca519]"            onClick={handleCurrencyToggle}
           >
             Switch to {currency === "USD" ? "EUR" : "USD"}
           </button>
@@ -140,18 +143,18 @@ export default function Index() {
             - Updates search parameters using the handleFilterChange function.
             - Includes sliders for quick price selection in addition to numeric input.
         */}
-        <div className="mb-6 bg-white p-4 rounded-lg shadow-sm">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Filter by Price & Location</h2>
+        <div className="mb-6 bg-greenAccount-daylightCard p-4 rounded-lg shadow-sm">
+          <h2 className="text-lg font-medium text-greenAccount-daylightText mb-4">Filter by Price & Location</h2>
           <div className="flex gap-4">
             <div>
-              <label htmlFor="minPrice" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="minPrice" className="block text-sm font-medium text-greenAccount-daylightText">
                 Min Price ({currency})
               </label>
               <input
                 type="text"
                 id="minPrice"
                 name="minPrice"
-                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("minPrice") || ""}
                 onInput={(e) => {
                   // Restrict to numerical input
@@ -173,14 +176,14 @@ export default function Index() {
               />
             </div>
             <div>
-              <label htmlFor="maxPrice" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="maxPrice" className="block text-sm font-medium text-greenAccount-daylightText">
                 Max Price ({currency})
               </label>
               <input
                 type="text"
                 id="maxPrice"
                 name="maxPrice"
-                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("maxPrice") || ""}
                 onInput={(e) => {
                   // Restrict to numerical input
@@ -203,17 +206,16 @@ export default function Index() {
             </div>
             
             <div>
-              <label htmlFor="location" className="text-gray-800 block text-sm font-medium text-gray-700">
+              <label htmlFor="location" className="text-greenAccount-daylightText block text-sm font-medium">
                 Location
               </label>
               <input
                 type="text"
                 id="location"
                 name="location"
-                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("location") || ""}
                 onInput={(e) => {
-                  // Restrict to alphabetical input, including German special characters and spaces
                   e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
                 }}
                 onChange={handleFilterChange}
@@ -226,7 +228,44 @@ export default function Index() {
             - Passes filtered plots and currency details as props to the PlotsList component.
             - PlotsList renders the individual plots with currency-specific prices.
         */}
+        <div 
+        className="bg-cover bg-center p-8 rounded-lg"
+        style={{
+          backgroundImage: "url('https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/66dffd2b0f8017c53512c6cd_rosenhaeger-wiese_green-account.webp')"
+        }}
+      >
         <PlotsList plots={plots} currency={currency} conversionRate={conversionRate} />
+      </div>
+      {/* Footer Section */}
+      <footer className="mt-12 py-2 bg-greenAccount-daylightBg text-greenAccount-daylightText text-center">
+          <p className="mb-8 text-greenAccount-daylightCard">Mehr über unsere Projekte:</p>
+          <div className="flex justify-center gap-20">
+            <a
+              href="https://www.greenaccount.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-green-400"
+            >
+              <img
+               src="https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/67374627f0e4692152ec1d18_greenaccount_logo_2C_positive_RGB.webp"
+               alt="Green Account Logo"
+               className="h-9"
+              />
+            </a>
+            <a
+              href="https://www.kompensationsmarkt.de/oekopunkte"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-green-400"
+            >
+               <img
+               src="https://cdn.prod.website-files.com/66ac8afd737ef2f88a8bc848/66b22541e8812b121abb37e7_Logo_gro%C3%9F.webp"
+               alt="Green Account Logo"
+               className="h-9"
+              />
+            </a>
+          </div>
+        </footer>
       </div>
     </div>
   );

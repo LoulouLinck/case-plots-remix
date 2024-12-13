@@ -27,15 +27,25 @@ const Plot: React.FC<PlotProps> = ({ plot, currency, conversionRate }) => {
   }
 
   return (
-    <div className="plot card font-sans bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-lg p-4">
-      <h2 className="text-xl sm:text-2xl py-4 sm:py-6 font-sans font-semibold text-gray-900 dark:text-white">{plot.title}</h2>
-      <p className="font-sans text-gray-700 dark:text-gray-400"><strong>Location:</strong> {plot.location}</p>
-      <p className="font-sans text-gray-700 dark:text-gray-400"><strong>Size:</strong> {plot.size} m²</p>
-      {/* Conditional rendering based on selected currency */}
-      <p className="font-sans text-gray-700 dark:text-gray-400">
-        <strong>Price:</strong> {currency === "USD" ? "$" : "€"}{displayPrice.toLocaleString()}
+    // Applying the card styling logic for the plot component
+    <div className="card bg-greenAccount-daylightCard bg-greenAccount-daylightCard dark:bg-greenAccount-darkCard dark:text-greenAccount-darkText rounded-lg shadow-sm p-4 hover:shadow-lg">
+      <h2 className="text-xl sm:text-2xl py-4 sm:py-6 font-sans font-semibold text-greenAccount-daylightText dark:text-greenAccount-darkText">
+        {plot.title}
+      </h2>
+      <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText">
+        <strong>Location:</strong> {plot.location}
       </p>
-      <p className="font-sans text-gray-500 dark:text-gray-400"><strong>Description:</strong> {plot.description}</p>
+      <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText">
+        <strong>Size:</strong> {plot.size} m²
+      </p>
+      {/* Conditional rendering based on selected currency */}
+      <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText">
+        <strong>Price:</strong> {currency === "USD" ? "$" : "€"}
+        {displayPrice.toLocaleString()}
+      </p>
+      <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText">
+        <strong>Description:</strong> {plot.description}
+      </p>
     </div>
   );
 };
