@@ -117,18 +117,19 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-greenAccount-daylightBg text-greenAccount-daylightText py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Available Plots</h1>
 
         {/* 8. Currency Toggle Section:
             - Adds a toggle button for switching between USD and EUR.
             - Displays the next currency to switch to.
         */}
+        <h1 className="text-3xl font-bold text-greenAccount-daylightText mb-8">Available Plots</h1>
+  
         <div className="flex justify-end mb-6">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600"
+            className="bg-[#95c11f] text-white px-4 py-2 rounded shadow hover:bg-[#7ca519]"
             onClick={handleCurrencyToggle}
           >
             Switch to {currency === "USD" ? "EUR" : "USD"}
@@ -140,18 +141,18 @@ export default function Index() {
             - Updates search parameters using the handleFilterChange function.
             - Includes sliders for quick price selection in addition to numeric input.
         */}
-        <div className="mb-6 bg-white p-4 rounded-lg shadow-sm">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Filter by Price & Location</h2>
+        <div className="mb-6 bg-greenAccount-daylightCard p-4 rounded-lg shadow-sm">
+          <h2 className="text-lg font-medium text-greenAccount-daylightText mb-4">Filter by Price & Location</h2>
           <div className="flex gap-4">
             <div>
-              <label htmlFor="minPrice" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="minPrice" className="block text-sm font-medium text-greenAccount-daylightText">
                 Min Price ({currency})
               </label>
               <input
                 type="text"
                 id="minPrice"
                 name="minPrice"
-                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("minPrice") || ""}
                 onInput={(e) => {
                   // Restrict to numerical input
@@ -173,14 +174,14 @@ export default function Index() {
               />
             </div>
             <div>
-              <label htmlFor="maxPrice" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="maxPrice" className="block text-sm font-medium text-greenAccount-daylightText">
                 Max Price ({currency})
               </label>
               <input
                 type="text"
                 id="maxPrice"
                 name="maxPrice"
-                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("maxPrice") || ""}
                 onInput={(e) => {
                   // Restrict to numerical input
@@ -203,17 +204,16 @@ export default function Index() {
             </div>
             
             <div>
-              <label htmlFor="location" className="text-gray-800 block text-sm font-medium text-gray-700">
+              <label htmlFor="location" className="text-greenAccount-daylightText block text-sm font-medium">
                 Location
               </label>
               <input
                 type="text"
                 id="location"
                 name="location"
-                className="text-gray-800 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("location") || ""}
                 onInput={(e) => {
-                  // Restrict to alphabetical input, including German special characters and spaces
                   e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
                 }}
                 onChange={handleFilterChange}
