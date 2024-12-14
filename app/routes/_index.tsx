@@ -121,29 +121,32 @@ export default function Index() {
       <div className="max-w-7xl mx-auto">
        
         {/* Header Section */}
-        <h1 className="text-3xl font-bold mb-8">
-         <span className="text-[rgb(124,165,25)]">Available </span> 
+        <div className="flex items-center justify-between">
+                  <h1 className="text-3xl font-bold mb-8">
+         <span className="text-greenAccount-lightGreenFeatures">Available </span> 
          <span className="text-[#f1ecd1]">Plots</span>
        </h1>
     
-     {/* 8. Currency Toggle Section:
+            {/* 8. Currency Toggle Section:
             - Adds a toggle button for switching between USD and EUR.
             - Displays the next currency to switch to.
-        */}
+            */}
         <div className="flex justify-end mb-6">
           <button
-            className="bg-[#95c11f] text-white px-[1.25rem] py-[0.6rem] rounded-tl-[1rem] rounded-tr-[0.25rem] rounded-bl-[0.25rem] rounded-br-[1rem] shadow hover:bg-[#7ca519]"            onClick={handleCurrencyToggle}
-          >
-            Switch to {currency === "USD" ? "EUR" : "USD"}
+            className="bg-[#95c11f] text-white px-[1.25rem] py-[0.6rem] rounded-tl-[1rem] rounded-tr-[0.25rem] rounded-bl-[0.25rem] rounded-br-[1rem] shadow hover:bg-[#7ca519]"            
+            onClick={handleCurrencyToggle}>
+             <strong>Switch to {currency === "USD" ? "EUR" : "USD"}</strong> 
           </button>
         </div>
+        </div>
+
 
         {/* 9. Price and Location Filter Inputs:
             - Allows users to filter plots by price and location.
             - Updates search parameters using the handleFilterChange function.
             - Includes sliders for quick price selection in addition to numeric input.
         */}
-        <div className="mb-6 bg-greenAccount-daylightCard p-4 rounded-lg shadow-sm">
+        <div className="mb-6 bg-greenAccount-beigeFeatures p-4 rounded-lg shadow-sm">
           <h2 className="text-lg font-medium text-greenAccount-daylightText mb-4">Filter by Price & Location</h2>
           <div className="flex gap-4">
             <div>
@@ -154,7 +157,7 @@ export default function Index() {
                 type="text"
                 id="minPrice"
                 name="minPrice"
-                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("minPrice") || ""}
                 onInput={(e) => {
                   // Restrict to numerical input
@@ -183,7 +186,7 @@ export default function Index() {
                 type="text"
                 id="maxPrice"
                 name="maxPrice"
-                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("maxPrice") || ""}
                 onInput={(e) => {
                   // Restrict to numerical input
@@ -213,7 +216,7 @@ export default function Index() {
                 type="text"
                 id="location"
                 name="location"
-                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-daylightText shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 value={searchParams.get("location") || ""}
                 onInput={(e) => {
                   e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
