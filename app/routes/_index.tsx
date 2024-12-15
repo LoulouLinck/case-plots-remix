@@ -87,15 +87,80 @@ export default function Index() {
   // Define the conversion rate from USD to EUR.
   const conversionRate = 0.9524;
 
+    // Generate all unique locations from the plots data
+    const allLocations = Array.from(new Set(plots.map((plot) => plot.location)));
+
+    // State for managing user input and filtered locations list
+  const [locationInput, setLocationInput] = useState("");
+  const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
+  const [isDropdownVisible, setDropdownVisible] = useState(false); // Manage visibility of the dropdown
+
+  // Handle input change: update location input and filter available locations
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    setLocationInput(input);
+
+    // Filter the available locations based on the typed input
+    if (input) {
+      const filtered = allLocations.filter((location) =>
+        location.toLowerCase().includes(input.toLowerCase())
+      );
+      setFilteredLocations(filtered);
+    } else {
+      setFilteredLocations(allLocations); // Show all locations if no input
+    }
+
+    // Update search params (location filter)
+    const params = new URLSearchParams(searchParams);
+    if (input) {
+      params.set("location", input);
+    } else {
+      params.delete("location");
+    }
+    setSearchParams(params); // Update search params
+  };
+
+  // Handle selection of a location from the suggestions
+  const handleLocationSelect = (location: string) => {
+    setLocationInput(location);
+    setFilteredLocations([]); // Hide the dropdown after selection
+    setDropdownVisible(false); // Hide the dropdown
+
+    // Update search params with selected location
+    const params = new URLSearchParams(searchParams);
+    params.set("location", location);
+    setSearchParams(params); // Update search params
+  };
+
+  // Show the dropdown when the input field is focused
+  const handleFocus = () => {
+    setDropdownVisible(true);
+  };
+
+  // Hide the dropdown if the user clicks outside the input
+  const handleBlur = () => {
+    setDropdownVisible(false);
+  };
+
   // Updates the query parameters based on user input in the filter fields.
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const params = new URLSearchParams(searchParams);
 
-    if (value) {
-      params.set(name, value);
+    if (name === "location-select") {
+      // Update the location value based on the dropdown selection
+      if (value) {
+        params.set("location", value); // Set location using the dropdown
+      } else {
+        params.delete("location"); // Remove location filter if empty
+      }
     } else {
-      params.delete(name);
+      // Handle other inputs (e.g., minPrice, maxPrice, manual location input)
+      if (value) {
+        params.set(name, value); // Set the query parameter for the corresponding input
+      } else {
+        params.delete(name); // Remove the query parameter if value is empty
+      }
     }
 
     // Ensure the current currency is reflected in the query params.
@@ -149,6 +214,8 @@ export default function Index() {
         <div className="mb-6 bg-greenAccount-beigeFeatures p-4 rounded-lg shadow-sm">
           <h2 className="text-lg font-medium text-greenAccount-daylightText mb-4">Filter by Price & Location</h2>
           <div className="flex gap-4">
+
+            {/* Min Price Filter */}
             <div>
               <label htmlFor="minPrice" className="block text-sm font-medium text-greenAccount-daylightText">
                 Min Price ({currency})
@@ -165,7 +232,7 @@ export default function Index() {
                 }}
                 onChange={handleFilterChange}
               />
-              {/* Slider for Min Price */}
+              {/* Slider Min Price */}
               <input
                 type="range"
                 id="minPriceSlider"
@@ -178,6 +245,8 @@ export default function Index() {
                 className="mt-2 w-full"
               />
             </div>
+
+            {/* Max Price Filter */}
             <div>
               <label htmlFor="maxPrice" className="block text-sm font-medium text-greenAccount-daylightText">
                 Max Price ({currency})
@@ -194,7 +263,7 @@ export default function Index() {
                 }}
                 onChange={handleFilterChange}
               />
-              {/* Slider for Max Price */}
+              {/* Slider Max Price */}
               <input
                 type="range"
                 id="maxPriceSlider"
@@ -208,10 +277,13 @@ export default function Index() {
               />
             </div>
             
+            {/* Location Filter */}
             <div>
               <label htmlFor="location" className="text-greenAccount-daylightText block text-sm font-medium">
                 Location
               </label>
+               <div className="relative"> 
+              {/* Manual Input */}
               <input
                 type="text"
                 id="location"
@@ -222,10 +294,34 @@ export default function Index() {
                   e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
                 }}
                 onChange={handleFilterChange}
-              />
-            </div>
+                onFocus={() => setDropdownVisible(true)}  // Show dropdown on focus
+          onBlur={() => setTimeout(() => setDropdownVisible(false), 200)}  // Hide dropdown after clicking away
+          placeholder="Enter location"
+        />
+        
+        {/* Location Dropdown */}
+        {isDropdownVisible && searchParams.get("location") && (
+          <div className="absolute w-full mt-1 bg-white shadow-lg max-h-60 overflow-auto z-10 border border-gray-300 rounded-md">
+            {allLocations
+              .filter(location => location.toLowerCase().includes(searchParams.get("location").toLowerCase())) // Filter based on input
+              .map((location, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    handleFilterChange({ target: { name: "location", value: location } });
+                    setDropdownVisible(false);  // Close dropdown after selection
+                  }}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  {location}
+                </div>
+              ))}
           </div>
-        </div>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
 
         {/* 10. PlotsList Integration:
             - Passes filtered plots and currency details as props to the PlotsList component.
