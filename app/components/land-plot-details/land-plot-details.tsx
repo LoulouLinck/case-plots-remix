@@ -54,15 +54,17 @@ const PlotDetails: React.FC<PlotDetailsProps> = ({ plot, currency, conversionRat
        <span>{displayPrice.toLocaleString()}</span>
       </p>
 
-    {/* Owner */}
-    <p className="mb-2">
-      <strong>Owner:</strong> {plot.owner}
-    </p>
+{/* Owner */}
+<p className="mb-2">
+  <strong>Owner:</strong>{" "}
+  <a 
+    href={`mailto:${plot.contact}`} 
+    className="text-blue-500 hover:underline"
+  >
+    {plot.owner}
+  </a>
+</p>
 
-    {/* Contact */}
-    <p className="mb-2">
-      <strong>Contact:</strong> {plot.contact}
-    </p>
 
     {/* Project Types */}
     {plot.projectType && plot.projectType.length > 0 && (
