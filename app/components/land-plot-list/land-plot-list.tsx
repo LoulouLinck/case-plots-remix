@@ -52,15 +52,29 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }
           - Currency and conversion rate are passed to Plot for dynamic pricing.
         */}
         {plots.map((plot) => (
-          <div key={plot.id} onClick={() => openModal(plot)}>
-            <Plot plot={plot} currency={currency} conversionRate={conversionRate} />
+          <div 
+           key={plot.id} 
+           onClick={() => openModal(plot)}
+           className="card-container cursor-pointer transition-transform transform hover:scale-105 hover:shadow-inner"
+           >
+            <Plot 
+              plot={plot} 
+              currency={currency} 
+              conversionRate={conversionRate} 
+            />
           </div>
         ))}
       </div>
 
       {/* Modal for PlotDetails */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {selectedPlot && <PlotDetails plot={selectedPlot} currency={currency} conversionRate={conversionRate} />}
+        {selectedPlot && 
+          <PlotDetails 
+           plot={selectedPlot} 
+           currency={currency} 
+           conversionRate={conversionRate} 
+          />
+        }
       </Modal>
     </div>
   );
