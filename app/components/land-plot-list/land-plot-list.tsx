@@ -60,7 +60,7 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }
 
       {/* Modal for PlotDetails */}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {selectedPlot && <PlotDetails plot={selectedPlot} />}
+        {selectedPlot && <PlotDetails plot={selectedPlot} currency={currency} conversionRate={conversionRate} />}
       </Modal>
     </div>
   );

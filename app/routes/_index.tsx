@@ -239,9 +239,10 @@ export default function Index() {
       >
         <PlotsList plots={plots} currency={currency} conversionRate={conversionRate} />
       </div>
+
       {/* Footer Section */}
       <footer className="mt-12 py-2 bg-greenAccount-daylightBg text-greenAccount-daylightText text-center">
-          <p className="mb-8 text-greenAccount-daylightCard">Mehr über unsere Projekte:</p>
+          <p className="mb-8 text-greenAccount-beigeFeatures">Mehr über unsere Projekte:</p>
           <div className="flex justify-center gap-20">
             <a
               href="https://www.greenaccount.com/"
