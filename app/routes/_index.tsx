@@ -237,8 +237,8 @@ export default function Index() {
                 type="range"
                 id="minPriceSlider"
                 name="minPrice"
-                min="0"
-                max="200000"
+                min="130000"
+                max="190000"
                 step="1000"
                 value={searchParams.get("minPrice") || "0"}
                 onChange={handleFilterChange}
@@ -268,8 +268,8 @@ export default function Index() {
                 type="range"
                 id="maxPriceSlider"
                 name="maxPrice"
-                min="0"
-                max="200000"
+                min="130000"
+                max="190000"
                 step="1000"
                 value={searchParams.get("maxPrice") || "1000000"}
                 onChange={handleFilterChange}
@@ -328,12 +328,18 @@ export default function Index() {
             - PlotsList renders the individual plots with currency-specific prices.
         */}
         <div 
-        className="bg-cover bg-center p-8 rounded-lg"
-        style={{
-          backgroundImage: "url('https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/66dffd2b0f8017c53512c6cd_rosenhaeger-wiese_green-account.webp')"
-        }}
-      >
+          className="bg-cover bg-center p-8 rounded-lg"
+          style={{
+            backgroundImage: "url('https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/66dffd2b0f8017c53512c6cd_rosenhaeger-wiese_green-account.webp')"
+          }}
+        >
+         {plots.length === 0 ? (
+          <div className="text-center text-[#f1ecd1] font-bold text-4xl">
+            <p>No plot match your criteria.</p>
+          </div>
+        ) : (
         <PlotsList plots={plots} currency={currency} conversionRate={conversionRate} />
+      )}
       </div>
 
       {/* Footer Section */}
