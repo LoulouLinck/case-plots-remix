@@ -3,7 +3,6 @@
 
 import React, { useState } from "react";
 import Plot from "../land-plot/land-plot"; // Import Plot component
-import Modal from "../modal"; // Import Modal component for displaying plot details in a modal
 import PlotDetails from "../land-plot-details/land-plot-details"; // Import PlotDetails component
 import { Plot as PlotType } from "~/data/plots"; // Ensure correct type is imported: from data stored in plots.ts
 
@@ -25,18 +24,15 @@ interface PlotsListProps {
 const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }) => {
   // State to track selected plot for the modal
   const [selectedPlot, setSelectedPlot] = useState<PlotType | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Open modal and set the selected plot
-  const openModal = (plot: PlotType) => {
+  const openPlotDetails = (plot: PlotType) => {
     setSelectedPlot(plot);
-    setIsModalOpen(true);
   };
 
   // Close modal and clear the selected plot
-  const closeModal = () => {
+  const closePlotDetails = () => {
     setSelectedPlot(null);
-    setIsModalOpen(false);
   };
 
   return (
@@ -53,10 +49,10 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }
         */}
         {plots.map((plot) => (
           <div 
-           key={plot.id} 
-           onClick={() => openModal(plot)}
-           className="card-container cursor-pointer transition-transform transform hover:scale-105 hover:shadow-inner"
-           >
+            key={plot.id} 
+            onClick={() => openPlotDetails(plot)}
+            className="card-container cursor-pointer transition-transform transform hover:scale-105 hover:shadow-inner"
+          >
             <Plot 
               plot={plot} 
               currency={currency} 
@@ -66,35 +62,35 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }
         ))}
       </div>
 
-      {/* Modal for PlotDetails */}
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {selectedPlot && 
-          <PlotDetails 
-           plot={selectedPlot} 
-           currency={currency} 
-           conversionRate={conversionRate} 
-          />
-        }
-      </Modal>
+      {/* PlotDetails Modal */}
+      {selectedPlot && (
+        <PlotDetails
+          isOpen={Boolean(selectedPlot)}
+          onClose={closePlotDetails}
+          plot={selectedPlot}
+          currency={currency}
+          conversionRate={conversionRate}
+        />
+      )}
     </div>
   );
 };
 
 export default PlotsList;
 
-      {/*
-        ---------------------- Dynamic Routing Code Reference ----------------------
-        The below section demonstrates an alternative approach using dynamic routing.
-        Uncomment and adjust if dynamic routing is required instead of modals.
+{/*
+  ---------------------- Dynamic Routing Code Reference ----------------------
+  The below section demonstrates an alternative approach using dynamic routing.
+  Uncomment and adjust if dynamic routing is required instead of modals.
 
-        <div className="plots-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {plots.map((plot) => (
-            <div key={plot.id}>
-              <Link to={`/plots/${plot.id}`}> 
-                {/* Ensure this matches the dynamic route */}
-        //         <Plot plot={plot} />
-        //       </Link>
-        //     </div>
-        //   ))}
-        // </div>
-      
+  <div className="plots-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {plots.map((plot) => (
+      <div key={plot.id}>
+        <Link to={`/plots/${plot.id}`}> 
+          {/* Ensure this matches the dynamic route */}
+//           <Plot plot={plot} />
+//         </Link>
+//       </div>
+//     ))}
+//   </div>
+// */}

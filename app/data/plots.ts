@@ -7,7 +7,7 @@ export interface Plot {
   price: number;       // The price of the plot in USD
   location: string;    // Geographic location of the plot
   description: string; // A detailed description of the plot
-  projectType: string[]; // Additional data: special project type
+  projectType: "Moore" | "Feldhecken" | "Wälder" | "Streuobstwiesen"; // Restricted to specific value
   owner: string; // The name of the plot owner
   contact: string; // The contact information of the plot owner
 }
@@ -22,7 +22,7 @@ export const plots: Plot[] = [
     price: 175000,
     location: "Schwarzwald, Baden-Württemberg",
     description: "Waldgrundstück mit hoher Artenvielfalt und altem Baumbestand",
-    projectType: ["Naturschutz", "Wiederaufforstung"], // Translated project types
+    projectType: "Wälder", // Translated project types
     owner: "Max Mustermann",
     contact: "max@mustermann.com",
   },
@@ -33,7 +33,7 @@ export const plots: Plot[] = [
     price: 145000,
     location: "Lüneburger Heide, Niedersachsen",
     description: "Heidefläche mit seltenen Pflanzenarten und Insektenpopulationen",
-    projectType: ["Renaturierung von Lebensräumen", "Erhalt der Biodiversität"],
+    projectType: "Feldhecken",
     owner: "Sabine Schmidt",
     contact: "sabine@schmidt.com",
   },
@@ -44,7 +44,7 @@ export const plots: Plot[] = [
     price: 160000,
     location: "Spreewald, Brandenburg",
     description: "Naturbelassenes Feuchtgebiet mit reichem Vogelvorkommen",
-    projectType: ["Erhalt von Feuchtgebieten", "Lebensraum für Wildtiere"],
+    projectType: "Moore",
     owner: "Jürgen Müller",
     contact: "juergen@mueller.com",
   },
@@ -55,7 +55,7 @@ export const plots: Plot[] = [
     price: 190000,
     location: "Allgäu, Bayern",
     description: "Traditionelle Streuobstwiese mit alten Obstsorten und Wildblumen",
-    projectType: ["Kulturerbe", "Wiederherstellung von Obstgärten"],
+    projectType: "Streuobstwiesen",
     owner: "Anna Weber",
     contact: "anna@weber.com",
   },
@@ -66,7 +66,7 @@ export const plots: Plot[] = [
     price: 168000,
     location: "Eifel, Rheinland-Pfalz",
     description: "Artenreiches Grünland mit Quellgebieten und Schmetterlingshabitaten",
-    projectType: ["Naturschutzgebiet", "Schutz von Wildtieren"],
+    projectType: "Feldhecken",
     owner: "Oliver Klein",
     contact: "oliver@klein.com",
   },
