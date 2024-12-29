@@ -192,6 +192,7 @@ export default function Index() {
          filteredLocations={filteredLocations}
          setDropdownVisible={setDropdownVisible}
          isDropdownVisible={isDropdownVisible}
+         currency={currency} // Pass the currency to the filters
        />
 
        {/* Plots List */}

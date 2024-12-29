@@ -9,6 +9,7 @@ interface PriceLocationFiltersProps {
  filteredLocations: string[];
  setDropdownVisible: React.Dispatch<React.SetStateAction<boolean>>;
  isDropdownVisible: boolean;
+ currency: string;
 }
 
 const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
@@ -20,6 +21,7 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
  filteredLocations,
  setDropdownVisible,
  isDropdownVisible,
+ currency,
 }) => {
 
  return (
@@ -30,7 +32,7 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
        {/* Min Price Filter */}
        <div>
          <label htmlFor="minPrice" className="block text-sm font-medium text-greenAccount-daylightText">
-           Min Price ({searchParams.get("currency")})
+           Min Price ({currency})
          </label>
          <input
            type="text"
@@ -67,7 +69,7 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
        {/* Max Price Filter */}
        <div>
          <label htmlFor="maxPrice" className="block text-sm font-medium text-greenAccount-daylightText">
-           Max Price ({searchParams.get("currency")})
+           Max Price ({currency})
          </label>
          <input
            type="text"
@@ -110,32 +112,36 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
 
            {/* Manual Input */}
            <input
-             type="text"
-             id="location"
-             name="location"
-             className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
-             value={locationInput}
-             onInput={(e) => {
-               e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
-             }}
-             onChange={handleInputChange}
-             onFocus={() => setDropdownVisible(true)}
-             onBlur={() => setTimeout(() => setDropdownVisible(false), 200)}
-             placeholder="Enter location"
-           />
+               type="text"
+               id="location"
+               name="location"
+               className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
+               value={searchParams.get("location") || ""}
+               onInput={(e) => {
+                 e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
+               }}
+               onChange={handleFilterChange}
+               onFocus={() => setDropdownVisible(true)}  // Show dropdown on focus
+         onBlur={() => setTimeout(() => setDropdownVisible(false), 200)}  // Hide dropdown after clicking away
+         placeholder="Enter location"
+       />
+
            {/* Location Dropdown */}
-           {isDropdownVisible && locationInput && (
-             <div className="absolute w-full mt-1 bg-white shadow-lg max-h-60 overflow-auto z-10 border border-gray-300 rounded-md">
-               {filteredLocations.map((location, index) => (
-                 <div
-                   key={index}
-                   onClick={() => {
-                     handleFilterChange({ target: { name: "location", value: location } });
-                     setDropdownVisible(false);
-                   }}
-                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                 >
-                   {location}
+           {isDropdownVisible && searchParams.get("location") && (
+         <div className="absolute w-full mt-1 bg-white shadow-lg max-h-60 overflow-auto z-10 border border-gray-300 rounded-md">
+           {allLocations
+             .filter(location => location.toLowerCase().includes(searchParams.get("location").toLowerCase())) // Filter based on input
+             .map((location, index) => (
+               <div
+                 key={index}
+                 onClick={() => {
+                   handleFilterChange({ target: { name: "location", value: location } });
+                   setDropdownVisible(false);  // Close dropdown after selection
+                 }}
+                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+               >
+                 {location}
+
                  </div>
                ))}
              </div>
