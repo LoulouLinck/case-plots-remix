@@ -1,10 +1,7 @@
-// The 'PlotsList' component handles the rendering of a collection of plots.
-// Individual plot rendering is delegated to the Plot component.
-
 import React, { useState } from "react";
-import Plot from "../land-plot/land-plot"; // Import Plot component
-import PlotDetails from "../land-plot-details/land-plot-details"; // Import PlotDetails component
-import { Plot as PlotType } from "~/data/plots"; // Ensure correct type is imported: from data stored in plots.ts
+import Plot from "../land-plot/land-plot";
+import PlotDetails from "../land-plot-details/land-plot-details";
+import { Plot as PlotType } from "~/data/plots"; // Imports correct type: from data stored in plots.ts
 
 // Interface for Props: 
 // - Defines what PlotsList component expects to receive.
@@ -39,14 +36,6 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }
     <div>
       {/* Wrapper div for list of plots */}
       <div className="wrapper-plot-list">
-        {/*
-          'map' method iterates over 'plots' array passed as a prop.
-          For each 'plot' object in the array:
-          - A 'Plot' component is rendered.
-          - 'key' prop ensures efficient update and tracking of items in list.
-          - 'plot' object passed to 'Plot' component as prop to render its details.
-          - Currency and conversion rate are passed to Plot for dynamic pricing.
-        */}
         {plots.map((plot) => (
           <div 
             key={plot.id} 

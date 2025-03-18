@@ -1,5 +1,3 @@
-// The 'Plot' component will display the individual plot details (title, size, price, location, description).
-
 import React from "react";
 import locationIcon from '../img/location_icon.png';
 import sizeIcon from '../img/size_icon.png';
@@ -18,8 +16,8 @@ interface PlotProps {
     location: string;
     description: string;
   };
-  currency: "USD" | "EUR"; // Currency in which the price is displayed
-  conversionRate: number; // Conversion rate from USD to EUR
+  currency: "USD" | "EUR"; // Currency in display
+  conversionRate: number; // Conversion rate USD to EUR
 }
 
 const Plot: React.FC<PlotProps> = ({ plot, currency, conversionRate }) => {
@@ -30,7 +28,6 @@ const Plot: React.FC<PlotProps> = ({ plot, currency, conversionRate }) => {
   }
 
   return (
-    // Applying the card styling logic for the plot component
     <div className="card mb-2">
       <h2 className="heading">
         {plot.title}

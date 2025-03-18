@@ -21,8 +21,8 @@ const projectTypeImages: { [key in PlotType["projectType"]]: string } = {
 };
 
 interface PlotDetailsProps {
-  isOpen: boolean; // Determines whether the modal is open or closed
-  onClose: () => void; // Function to handle closing the modal
+  isOpen: boolean;
+  onClose: () => void;
   plot: {
     id: string;
     title: string;
@@ -30,9 +30,9 @@ interface PlotDetailsProps {
     price: number;
     location: string;
     description: string;
-    projectType: PlotType["projectType"]; // Single project type value
-    owner: string; // Name of the owner
-    contact: string; // Contact information
+    projectType: PlotType["projectType"];
+    owner: string;
+    contact: string;
   };
   currency: "USD" | "EUR"; // Add currency prop
   conversionRate: number; // Add conversionRate prop
@@ -48,17 +48,15 @@ const PlotDetails: React.FC<PlotDetailsProps> = ({
   // If the modal is not open, render nothing (return null)
   if (!isOpen) return null;
 
-  // Calculate the display price based on the selected currency
   let displayPrice = plot.price;
   if (currency === "EUR") {
-    displayPrice = plot.price * conversionRate; // Convert to EUR
+    displayPrice = plot.price * conversionRate;
   }
 
   return (
-    // Modal backdrop
     <div
       className="modal-backdrop"
-      onClick={onClose} // Close modal on clicking the backdrop
+      onClick={onClose}
     >
       {/* Modal content */}
       <div
