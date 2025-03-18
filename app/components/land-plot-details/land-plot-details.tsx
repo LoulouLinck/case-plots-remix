@@ -4,10 +4,10 @@ import locationIcon from "../img/location_icon.png";
 import sizeIcon from "../img/size_icon.png";
 import descriptionIcon from "../img/description_icon.png";
 
-import mooreIllustration from "../img/moore_illustration.png";
-import feldheckenIllustration from "../img/feldhecken_illustration.png";
-import waelderIllustration from "../img/waelder-illustration.png";
-import streuobstwiesenIllustration from "../img/streuobstwiesen_illusration.png";
+import mooreIllustration from "./img/moore_illustration.png";
+import feldheckenIllustration from "./img/feldhecken_illustration.png";
+import waelderIllustration from "./img/waelder-illustration.png";
+import streuobstwiesenIllustration from "./img/streuobstwiesen_illusration.png";
 
 const projectTypeImages: { [key in PlotType["projectType"]]: string } = {
   // Moore: "https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/65aa677dc83cadddf5d1b408_Illustration_Oekosystem_Moor.webp", 
