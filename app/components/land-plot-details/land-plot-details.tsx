@@ -55,87 +55,83 @@ const PlotDetails: React.FC<PlotDetailsProps> = ({
   }
 
   return (
+    // Modal backdrop
     <div
-      className="fixed inset-0 bg-green-900 bg-opacity-30 dark:bg-darkGreen-800 dark:bg-opacity-90 flex items-center justify-center z-50"
+      className="modal-backdrop"
       onClick={onClose} // Close modal on clicking the backdrop
     >
       {/* Modal content */}
       <div
-        className="bg-greenAccount-beigeFeatures dark:bg-darkGreen-600 rounded-lg shadow-lg w-full max-w-md relative"
+        className="modal"
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
       >
         {/* Plot Details Content */}
         <div 
           className="p-6">
           {/* Title and Spacing Adjustment */}
-          <h1 className="text-3xl font-bold">{plot.title}</h1>
+          <h1 className="card-heading">{plot.title}</h1>
         </div>
-
           {/* Close button inside content */}
           <button
-            className="absolute top-3 right-3 text-greenAccount-lightGreenFeatures dark:text-darkGreen-100 hover:text-greenAccount-daylightText dark:hover:text-darkGreen-200"
+            className="X-button"
             onClick={onClose}
-            style={{ fontSize: "30px", lineHeight: "1" }}
           >
             ✖
           </button>
+          {/* Decorative line separator */}
+          <hr className="decorative-line" />
 
-          <hr className="h-[1px] border-0 bg-gradient-to-r from-transparent via-greenAccount-daylightText opacity-20 to-transparent" />
-
-          {/* className="w-[90%] mx-auto h-[1px] border-0 bg-gradient-to-r from-transparent via-greenAccount-daylightText to-transparent" */}
-
-        {/* Control spacing here */}
-        <div className="flex flex-col space-y-4 p-6">
-    
+        {/* Main content section */}
+        <div className="column-layout">
           {/* Description with Icon */}
           {plot.description && (
-            <p className="flex items-center">
-              <img src={descriptionIcon} alt="Description Icon" className="w-5 h-5 mr-2" />
+            <p className="flex-center">
+              <img src={descriptionIcon} alt="Description Icon" className="card-icon-size" />
               {plot.description}
             </p>
           )}
-    
+
           {/* Location with Icon */}
           {plot.location && (
-            <p className="flex items-center">
-              <img src={locationIcon} alt="Location Icon" className="w-5 h-5 mr-2" />
+            <p className="flex-center">
+              <img src={locationIcon} alt="Location Icon" className="card-icon-size" />
               {plot.location}
             </p>
           )}
-          
-          {/* Owner */}
+
+          {/* Owner contact */}
           <p>
             <strong>Owner:</strong>{" "}
-            <a href={`mailto:${plot.contact}`} className="text-blue-500 hover:underline">
+            <a href={`mailto:${plot.contact}`} className="mailto-link">
               {plot.owner}
             </a>
           </p>
-    
-          {/* Size and Price with Icon */}
-          <div className="grid grid-cols-[auto_1fr] gap-4">
+
+          {/* Size, Price and Icons */}
+          <div className="grid-details">
             {/* Size and Price Column */}
-            <div className="flex flex-col space-y-4">
+            <div className="column-layout">
               {/* Size with Icon */}
               {plot.size && (
-                <p className="flex items-center">
-                  <img src={sizeIcon} alt="Size Icon" className="w-5 h-5 mr-2" />
+                <p className="flex-center">
+                  <img src={sizeIcon} alt="Size Icon" className="card-icon-size" />
                   {plot.size} m²
                 </p>
               )}
 
-              {/* Price */}
-              <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText">
+              {/* Price with Symbols */}
+              <p>
                 <span className="mr-5">{currency === "USD" ? "$" : "€"}</span>
                 <span>{displayPrice.toLocaleString()}</span>
               </p>
             </div>
 
-            {/* Image Column */}
-            <div className="flex items-center justify-center flex-grow">
+            {/* Illustration Column */}
+            <div className="flex-grow-center">
               <img
                 src={projectTypeImages[plot.projectType]}
                 alt={`${plot.projectType} Illustration`}
-                className="w-41 h-41 object-contain" // Increase width/height as needed
+                className="w-41 h-41 object-contain"
               />
             </div>
           </div>
@@ -144,7 +140,6 @@ const PlotDetails: React.FC<PlotDetailsProps> = ({
       </div>
     </div>
   );
-  
   
 };
 

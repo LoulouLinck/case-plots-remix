@@ -38,7 +38,7 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }
   return (
     <div>
       {/* Wrapper div for list of plots */}
-      <div className="plots-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="wrapper-plot-list">
         {/*
           'map' method iterates over 'plots' array passed as a prop.
           For each 'plot' object in the array:
@@ -51,7 +51,7 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }
           <div 
             key={plot.id} 
             onClick={() => openPlotDetails(plot)}
-            className="card-container cursor-pointer transition-transform transform hover:scale-105 hover:shadow-inner"
+            className="card-hover"
           >
             <Plot 
               plot={plot} 

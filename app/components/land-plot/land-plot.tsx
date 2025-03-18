@@ -31,31 +31,31 @@ const Plot: React.FC<PlotProps> = ({ plot, currency, conversionRate }) => {
 
   return (
     // Applying the card styling logic for the plot component
-    <div className="card bg-greenAccount-daylightCard bg-greenAccount-daylightCard dark:bg-greenAccount-darkCard dark:text-greenAccount-darkText rounded-lg shadow-sm p-4 hover:shadow-lg mb-2">
-      <h2 className="text-xl sm:text-2xl py-4 sm:py-6 font-sans font-semibold text-greenAccount-daylightText dark:text-greenAccount-darkText">
+    <div className="card mb-2">
+      <h2 className="heading">
         {plot.title}
       </h2>
 
-      <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText flex items-center mb-2">
-       <img src={locationIcon} alt="Location Icon" className="w-5 h-5 mr-2" />
+      <p className="icon-info-spacing">
+       <img src={locationIcon} alt="Location Icon" className="card-icon-size" />
        {plot.location}
       </p>
 
-      <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText flex items-center mb-2">
-       <img src={sizeIcon} alt="Size Icon" className="w-5 h-5 mr-2" /> 
+      <p className="icon-info-spacing">
+       <img src={sizeIcon} alt="Size Icon" className="card-icon-size" /> 
        {plot.size} m²
       </p>
 
       {/* Conditional rendering based on selected currency */}
-      <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText mb-2">
+      <p className="icon-info-spacing">
        <span className="mr-5">
          {currency === "USD" ? "$" : "€"}
        </span>
        <span>{displayPrice.toLocaleString()}</span>
       </p>
 
-      <p className="font-sans text-greenAccount-daylightText dark:text-greenAccount-darkText flex items-center mb-2">
-       <img src={descriptionIcon} alt="Description Icon" className="w-5 h-5 mr-2" /> 
+      <p className="icon-info-spacing">
+       <img src={descriptionIcon} alt="Description Icon" className="card-icon-size" /> 
        {plot.description}
       </p>
 

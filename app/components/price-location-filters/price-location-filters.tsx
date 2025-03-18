@@ -25,20 +25,20 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
 }) => {
 
  return (
-   <div className="mb-6 bg-greenAccount-beigeFeatures p-4 rounded-lg shadow-sm">
-     <h2 className="text-lg font-medium text-greenAccount-daylightText mb-4">Filter by Price & Location</h2>
-     <div className="flex gap-4">
+   <div className="filters-section-wrapper">
+     <h2 className="filter-section-heading">Filter by Price & Location</h2>
 
+     <div className="flex gap-4">
        {/* Min Price Filter */}
        <div>
-         <label htmlFor="minPrice" className="block text-sm font-medium text-greenAccount-daylightText">
+         <label htmlFor="minPrice" className="filter-heading">
            Min Price ({currency})
          </label>
          <input
            type="text"
            id="minPrice"
            name="minPrice"
-           className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
+           className="filter-input"
            placeholder="130000"
            value={searchParams.get("minPrice") || ""}
            onFocus={(e) => {
@@ -62,20 +62,20 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
            step="1000"
            value={searchParams.get("minPrice") || "0"}
            onChange={handleFilterChange}
-           className="mt-2 w-full"
+           className="slider-styling"
          />
        </div>
 
        {/* Max Price Filter */}
        <div>
-         <label htmlFor="maxPrice" className="block text-sm font-medium text-greenAccount-daylightText">
+         <label htmlFor="maxPrice" className="filter-heading">
            Max Price ({currency})
          </label>
          <input
            type="text"
            id="maxPrice"
            name="maxPrice"
-           className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
+           className="filter-input"
            placeholder="190000"
            value={searchParams.get("maxPrice") || ""}
            onFocus={(e) => {
@@ -99,23 +99,25 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
            step="1000"
            value={searchParams.get("maxPrice") || "1000000"}
            onChange={handleFilterChange}
-           className="mt-2 w-full"
+           className="slider-styling"
          />
        </div>
 
        {/* Location Filter */}
        <div>
-         <label htmlFor="location" className="text-greenAccount-daylightText block text-sm font-medium">
+         <label htmlFor="location" className="filter-heading">
            Location
          </label>
-         <div className="relative">
+         
+         {/* Keeps dropdown anchored to input field  */}
+         <div className="relative"> 
 
            {/* Manual Input */}
            <input
                type="text"
                id="location"
                name="location"
-               className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
+               className="filter-input"
                value={searchParams.get("location") || ""}
                onInput={(e) => {
                  e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
@@ -128,7 +130,7 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
 
            {/* Location Dropdown */}
            {isDropdownVisible && searchParams.get("location") && (
-         <div className="absolute w-full mt-1 bg-white shadow-lg max-h-60 overflow-auto z-10 border border-gray-300 rounded-md">
+         <div className="location-dropdown">
            {allLocations
              .filter(location => location.toLowerCase().includes(searchParams.get("location").toLowerCase())) // Filter based on input
              .map((location, index) => (
@@ -138,10 +140,9 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
                    handleFilterChange({ target: { name: "location", value: location } });
                    setDropdownVisible(false);  // Close dropdown after selection
                  }}
-                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                 className="location-dropdown-hover"
                >
                  {location}
-
                  </div>
                ))}
              </div>
