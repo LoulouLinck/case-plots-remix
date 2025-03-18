@@ -2,10 +2,10 @@ import { useState } from "react"; // Import useState hook.
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
-import PlotsList from "../components/land-plot-list/land-plot-list"; // Import PlotsList component
+import PlotsList from "../components/PlotsList/PlotsList"; // Import PlotsList component
 import { plots, type Plot } from "~/data/plots"; // Import the plots data
-import CurrencyToggle from "../components/currency-toggle/currency-toggle"; // Import CurrencyToggle component
-import PriceLocationFilters from "../components/price-location-filters/price-location-filters"; // Import PriceLocationFilters component
+import CurrencyToggle from "../components/CurrencyToggle/CurrencyToggle"; // Import CurrencyToggle component
+import PriceLocationFilters from "../components/PriceLocationFilters/PriceLocationFilters"; // Import PriceLocationFilters component
 
 // 1. Meta Function:
 // Provides metadata for the route, setting the title and description.

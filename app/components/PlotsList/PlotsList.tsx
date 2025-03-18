@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Plot from "../land-plot/land-plot";
-import PlotDetails from "../land-plot-details/land-plot-details";
+import Plot from "../Plot/Plot";
+import PlotDetails from "../PlotDetails/PlotDetails";
 import { Plot as PlotType } from "~/data/plots"; // Imports correct type: from data stored in plots.ts
 
 // Interface for Props: 
