@@ -55,77 +55,73 @@ const PlotDetails: React.FC<PlotDetailsProps> = ({
 
   return (
     <div
-      className="modal-backdrop"
+      className="fixed bg-teal-900/60 dark:bg-teal-900/70 inset-0 flex items-center justify-center z-50"
       onClick={onClose}
     >
       {/* Modal content */}
       <div
-        className="modal"
-        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+        className="bg-[#fbfaf2] dark:bg-teal-800 rounded-lg shadow-lg p-6 hover:shadow-xl w-full max-w-md relative"
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Plot Details Content */}
-        <div 
-          className="p-6">
-          {/* Title and Spacing Adjustment */}
-          <h1 className="card-heading">{plot.title}</h1>
+        <div className="p-6">
+          <h1 className="text-3xl font-bold">{plot.title}</h1>
         </div>
           {/* Close button inside content */}
-          <button
-            className="X-button"
-            onClick={onClose}
-          >
-            ✖
-          </button>
-          {/* Decorative line separator */}
-          <hr className="decorative-line" />
+        <button
+          className="absolute top-3 right-3 text-lime-500 hover:text-emerald-900 text-3xl leading-none"
+          onClick={onClose}
+        >
+          ✖
+        </button>
+        <hr className="h-[1px] border-0 bg-gradient-to-r from-transparent via-emerald-900 dark:via-yellow-50 opacity-20 to-transparent" />
 
         {/* Main content section */}
-        <div className="column-layout">
-          {/* Description with Icon */}
+        <div className="flex flex-col space-y-4 p-6">
           {plot.description && (
-            <p className="flex-center">
-              <img src={descriptionIcon} alt="Description Icon" className="card-icon-size" />
+            <p className="flex items-center">
+              <img src={descriptionIcon} alt="Description Icon" className="w-5 h-5 mr-2" />
               {plot.description}
             </p>
           )}
 
           {/* Location with Icon */}
           {plot.location && (
-            <p className="flex-center">
-              <img src={locationIcon} alt="Location Icon" className="card-icon-size" />
+            <p className="flex items-center">
+              <img src={locationIcon} alt="Location Icon" className="w-5 h-5 mr-2" />
               {plot.location}
             </p>
           )}
 
           {/* Owner contact */}
-          <p>
+          <p className=" ">
             <strong>Owner:</strong>{" "}
-            <a href={`mailto:${plot.contact}`} className="mailto-link">
+            <a href={`mailto:${plot.contact}`} className="text-blue-500 hover:underline">
               {plot.owner}
             </a>
           </p>
 
           {/* Size, Price and Icons */}
-          <div className="grid-details">
+          <div className="grid grid-cols-[auto_1fr] gap-4">
             {/* Size and Price Column */}
-            <div className="column-layout">
+            <div className="flex flex-col space-y-4">
               {/* Size with Icon */}
               {plot.size && (
-                <p className="flex-center">
-                  <img src={sizeIcon} alt="Size Icon" className="card-icon-size" />
+                <p className="flex items-center">
+                  <img src={sizeIcon} alt="Size Icon" className="w-5 h-5 mr-2" />
                   {plot.size} m²
                 </p>
               )}
 
               {/* Price with Symbols */}
-              <p>
+              <p className=" ">
                 <span className="mr-5">{currency === "USD" ? "$" : "€"}</span>
                 <span>{displayPrice.toLocaleString()}</span>
               </p>
             </div>
 
             {/* Illustration Column */}
-            <div className="flex-grow-center">
+            <div className="flex items-center justify-center flex-grow">
               <img
                 src={projectTypeImages[plot.projectType]}
                 alt={`${plot.projectType} Illustration`}
@@ -133,12 +129,10 @@ const PlotDetails: React.FC<PlotDetailsProps> = ({
               />
             </div>
           </div>
-  
         </div>
       </div>
     </div>
   );
-  
 };
 
 export default PlotDetails;

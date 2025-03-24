@@ -25,20 +25,20 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
 }) => {
 
  return (
-   <div className="filters-section-wrapper">
-     <h2 className="filter-section-heading">Filter by Price & Location</h2>
+   <div className="mb-6 text-emerald-900 bg-yellow-50 p-4 rounded-lg shadow-sm ">
+     <h2 className="text-lg font-medium mb-4">Filter by Price & Location</h2>
 
      <div className="flex gap-4">
        {/* Min Price Filter */}
        <div>
-         <label htmlFor="minPrice" className="filter-heading">
+         <label htmlFor="minPrice" className="block text-sm font-medium">
            Min Price ({currency})
          </label>
          <input
            type="text"
            id="minPrice"
            name="minPrice"
-           className="filter-input"
+           className="mt-1 block w-full rounded-md border-lime-500 shadow-sm focus:border-blue-500 focus:ring-blue-500"
            placeholder="130000"
            value={searchParams.get("minPrice") || ""}
            onFocus={(e) => {
@@ -62,20 +62,20 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
            step="1000"
            value={searchParams.get("minPrice") || "0"}
            onChange={handleFilterChange}
-           className="slider-styling"
+           className="mt-2 w-full"
          />
        </div>
 
        {/* Max Price Filter */}
        <div>
-         <label htmlFor="maxPrice" className="filter-heading">
+         <label htmlFor="maxPrice" className="block text-sm font-medium">
            Max Price ({currency})
          </label>
          <input
            type="text"
            id="maxPrice"
            name="maxPrice"
-           className="filter-input"
+           className="mt-1 block w-full rounded-md border-lime-500 shadow-sm focus:border-blue-500 focus:ring-blue-500"
            placeholder="190000"
            value={searchParams.get("maxPrice") || ""}
            onFocus={(e) => {
@@ -99,13 +99,13 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
            step="1000"
            value={searchParams.get("maxPrice") || "1000000"}
            onChange={handleFilterChange}
-           className="slider-styling"
+           className="mt-2 w-full"
          />
        </div>
 
        {/* Location Filter */}
        <div>
-         <label htmlFor="location" className="filter-heading">
+         <label htmlFor="location" className="block text-sm font-medium">
            Location
          </label>
          
@@ -117,7 +117,7 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
                type="text"
                id="location"
                name="location"
-               className="filter-input"
+               className="mt-1 block w-full rounded-md border-lime-500 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                value={searchParams.get("location") || ""}
                onInput={(e) => {
                  e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
@@ -130,7 +130,7 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
 
            {/* Location Dropdown */}
            {isDropdownVisible && searchParams.get("location") && (
-         <div className="location-dropdown">
+         <div className="absolute w-full mt-1 bg-white shadow-lg max-h-60 overflow-auto z-10 border border-gray-300 rounded-md">
            {allLocations
              .filter(location => location.toLowerCase().includes(searchParams.get("location").toLowerCase())) // Filter based on input
              .map((location, index) => (
@@ -140,7 +140,7 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
                    handleFilterChange({ target: { name: "location", value: location } });
                    setDropdownVisible(false);  // Close dropdown after selection
                  }}
-                 className="location-dropdown-hover"
+                 className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                >
                  {location}
                  </div>

@@ -35,18 +35,14 @@ const PlotsList: React.FC<PlotsListProps> = ({ plots, currency, conversionRate }
   return (
     <div>
       {/* Wrapper div for list of plots */}
-      <div className="wrapper-plot-list">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {plots.map((plot) => (
-          <div 
-            key={plot.id} 
+          <div
+            key={plot.id}
             onClick={() => openPlotDetails(plot)}
-            className="card-hover"
+            className="cursor-pointer transition-transform transform hover:scale-105 hover:shadow-inner"
           >
-            <Plot 
-              plot={plot} 
-              currency={currency} 
-              conversionRate={conversionRate} 
-            />
+            <Plot plot={plot} currency={currency} conversionRate={conversionRate} />
           </div>
         ))}
       </div>

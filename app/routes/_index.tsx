@@ -170,13 +170,13 @@ export default function Index() {
  };
 
  return (
-   <div className="page-container">
-     <div className="page-content-wrapper">
+   <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+     <div className="max-w-7xl mx-auto">
        {/* Header Section */}
-       <div className="flex-center justify-between">
-         <h1 className="heading-lg">
-           <span className="text-brandLightGreen">Available </span>
-           <span className="text-brandBeige">Plots</span>
+       <div className="flex items-center justify-between">
+         <h1 className="text-3xl font-bold mb-8">
+           <span className="text-lime-500">Available </span>
+           <span className="text-yellow-50">Plots</span>
          </h1>
          {/* Currency Toggle Component */}
          <CurrencyToggle currency={currency} onToggle={handleCurrencyToggle} />
@@ -196,11 +196,9 @@ export default function Index() {
        />
 
        {/* Plots List */}
-       <div
-         className="image-cover"
-         >
+       <div className="bg-plot-background bg-cover bg-center p-8 rounded-lg">
          {plots.length === 0 ? (
-           <div className="no-result-msg">
+           <div className="text-center font-bold text-4xl text-yellow-50">
              <p>No plot match your criteria.</p>
            </div>
          ) : (
@@ -209,8 +207,8 @@ export default function Index() {
        </div>
       
        {/* Footer Section */}
-    <footer className="footer-layout">
-        <p className="mb-8 text-brandBeige">Mehr über unsere Projekte:</p>
+    <footer className="mt-12 py-2 bg-teal-800 text-center">
+        <p className="mb-8 text-yellow-50">Mehr über unsere Projekte:</p>
         <div className="flex justify-center gap-20">
           <a
             href="https://www.greenaccount.com/"
