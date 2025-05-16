@@ -2,23 +2,14 @@ import type { Config } from "tailwindcss";
 
 export default {
   content: ["./app/**/*.{js,jsx,ts,tsx}"],
-  darkMode: "class", // Enable dark mode based on the class
+  darkMode: "media", // Use system preferences for dark mode
   theme: {
     extend: {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
       },
-      colors: {
-        greenAccount: {
-          daylightBg: "#385c56", // Background for daylight mode
-          daylightText: "#0d3a32", // Text for daylight mode
-          daylightCard: "rgba(251, 250, 242, 0.66)", // Card background for daylight mode
-          beigeFeatures: "#fbfaf2", // Beige tone (heading + filters bg) 
-          lightGreenFeatures:"#95c11f",
-          darkBg: "#385c56", // Background for dark mode
-          darkText: "#fbfaf2", // Text for dark mode
-          darkCard: "#0d3a32", // Card background for dark mode
-        },
+      backgroundImage: {
+        'plot-background': "url('https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/66dffd2b0f8017c53512c6cd_rosenhaeger-wiese_green-account.webp')",
       },
     },
   },

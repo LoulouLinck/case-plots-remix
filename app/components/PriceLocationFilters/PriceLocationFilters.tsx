@@ -25,20 +25,20 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
 }) => {
 
  return (
-   <div className="mb-6 bg-greenAccount-beigeFeatures p-4 rounded-lg shadow-sm">
-     <h2 className="text-lg font-medium text-greenAccount-daylightText mb-4">Filter by Price & Location</h2>
-     <div className="flex gap-4">
+   <div className="mb-6 text-emerald-900 bg-yellow-50 p-4 rounded-lg shadow-sm ">
+     <h2 className="text-lg font-medium mb-4">Filter by Price & Location</h2>
 
+     <div className="flex gap-4">
        {/* Min Price Filter */}
        <div>
-         <label htmlFor="minPrice" className="block text-sm font-medium text-greenAccount-daylightText">
+         <label htmlFor="minPrice" className="block text-sm font-medium">
            Min Price ({currency})
          </label>
          <input
            type="text"
            id="minPrice"
            name="minPrice"
-           className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
+           className="mt-1 block w-full rounded-md border-lime-500 shadow-sm focus:border-blue-500 focus:ring-blue-500"
            placeholder="130000"
            value={searchParams.get("minPrice") || ""}
            onFocus={(e) => {
@@ -68,14 +68,14 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
 
        {/* Max Price Filter */}
        <div>
-         <label htmlFor="maxPrice" className="block text-sm font-medium text-greenAccount-daylightText">
+         <label htmlFor="maxPrice" className="block text-sm font-medium">
            Max Price ({currency})
          </label>
          <input
            type="text"
            id="maxPrice"
            name="maxPrice"
-           className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
+           className="mt-1 block w-full rounded-md border-lime-500 shadow-sm focus:border-blue-500 focus:ring-blue-500"
            placeholder="190000"
            value={searchParams.get("maxPrice") || ""}
            onFocus={(e) => {
@@ -105,17 +105,19 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
 
        {/* Location Filter */}
        <div>
-         <label htmlFor="location" className="text-greenAccount-daylightText block text-sm font-medium">
+         <label htmlFor="location" className="block text-sm font-medium">
            Location
          </label>
-         <div className="relative">
+         
+         {/* Keeps dropdown anchored to input field  */}
+         <div className="relative"> 
 
            {/* Manual Input */}
            <input
                type="text"
                id="location"
                name="location"
-               className="text-greenAccount-daylightText mt-1 block w-full rounded-md border-greenAccount-lightGreenFeatures shadow-sm focus:border-blue-500 focus:ring-blue-500"
+               className="mt-1 block w-full rounded-md border-lime-500 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                value={searchParams.get("location") || ""}
                onInput={(e) => {
                  e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-ZäöüÄÖÜß\s]/g, "");
@@ -141,7 +143,6 @@ const PriceLocationFilters: React.FC<PriceLocationFiltersProps> = ({
                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                >
                  {location}
-
                  </div>
                ))}
              </div>

@@ -2,10 +2,10 @@ import { useState } from "react"; // Import useState hook.
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, useSearchParams } from "@remix-run/react";
-import PlotsList from "../components/land-plot-list/land-plot-list"; // Import PlotsList component
+import PlotsList from "../components/PlotsList/PlotsList"; // Import PlotsList component
 import { plots, type Plot } from "~/data/plots"; // Import the plots data
-import CurrencyToggle from "../components/currency-toggle/currency-toggle"; // Import CurrencyToggle component
-import PriceLocationFilters from "../components/price-location-filters/price-location-filters"; // Import PriceLocationFilters component
+import CurrencyToggle from "../components/CurrencyToggle/CurrencyToggle"; // Import CurrencyToggle component
+import PriceLocationFilters from "../components/PriceLocationFilters/PriceLocationFilters"; // Import PriceLocationFilters component
 
 // 1. Meta Function:
 // Provides metadata for the route, setting the title and description.
@@ -170,13 +170,13 @@ export default function Index() {
  };
 
  return (
-   <div className="min-h-screen bg-greenAccount-daylightBg text-greenAccount-daylightText py-8 px-4 sm:px-6 lg:px-8">
+   <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
      <div className="max-w-7xl mx-auto">
        {/* Header Section */}
        <div className="flex items-center justify-between">
          <h1 className="text-3xl font-bold mb-8">
-           <span className="text-greenAccount-lightGreenFeatures">Available </span>
-           <span className="text-[#f1ecd1]">Plots</span>
+           <span className="text-lime-500">Available </span>
+           <span className="text-yellow-50">Plots</span>
          </h1>
          {/* Currency Toggle Component */}
          <CurrencyToggle currency={currency} onToggle={handleCurrencyToggle} />
@@ -196,15 +196,9 @@ export default function Index() {
        />
 
        {/* Plots List */}
-       <div
-         className="bg-cover bg-center p-8 rounded-lg"
-         style={{
-           backgroundImage:
-             "url('https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/66dffd2b0f8017c53512c6cd_rosenhaeger-wiese_green-account.webp')",
-         }}
-       >
+       <div className="bg-plot-background bg-cover bg-center p-8 rounded-lg">
          {plots.length === 0 ? (
-           <div className="text-center text-[#f1ecd1] font-bold text-4xl">
+           <div className="text-center font-bold text-4xl text-yellow-50">
              <p>No plot match your criteria.</p>
            </div>
          ) : (
@@ -213,14 +207,13 @@ export default function Index() {
        </div>
       
        {/* Footer Section */}
-    <footer className="mt-12 py-2 bg-greenAccount-daylightBg text-greenAccount-daylightText text-center">
-        <p className="mb-8 text-greenAccount-beigeFeatures">Mehr über unsere Projekte:</p>
+    <footer className="mt-12 py-2 bg-teal-800 text-center">
+        <p className="mb-8 text-yellow-50">Mehr über unsere Projekte:</p>
         <div className="flex justify-center gap-20">
           <a
             href="https://www.greenaccount.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-green-400"
           >
             <img
              src="https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/67374627f0e4692152ec1d18_greenaccount_logo_2C_positive_RGB.webp"
@@ -232,7 +225,6 @@ export default function Index() {
             href="https://www.kompensationsmarkt.de/oekopunkte"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-green-400"
           >
              <img
              src="https://cdn.prod.website-files.com/66ac8afd737ef2f88a8bc848/66b22541e8812b121abb37e7_Logo_gro%C3%9F.webp"

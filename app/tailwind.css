@@ -4,35 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Styling for reusable card components */
-/* .card {
-  @apply bg-greenAccount-daylightCard text-greenAccount-daylightText rounded-lg shadow-sm p-4 hover:shadow-lg;
-} */
-
 /* Body background and text styling for daylight and dark modes */
-/* html,
+html,
 body {
-  @apply bg-greenAccount-daylightBg text-greenAccount-daylightText;
-} */
+ @apply bg-teal-800 text-emerald-900;
+}
 
 /* Tailwind dark mode support (for body, etc.) */
-/* .dark html,
+.dark html,
 .dark body {
-  @apply bg-greenAccount-darkBg text-greenAccount-darkText;
-} */
-
-@layer utilities {
-  /* Ensure dark mode classes are registered */
-  .dark\:bg-greenAccount-darkBg {
-    --tw-bg-opacity: 1;
-    background-color: #385c56;
-  }
-  .dark\:bg-greenAccount-darkCard {
-    --tw-bg-opacity: 1;
-    background-color: #0d3a32;
-  }
-  .dark\:text-greenAccount-darkText {
-    --tw-text-opacity: 1;
-    color: #fbfaf2;
-  }
+ @apply text-yellow-50;
 }
