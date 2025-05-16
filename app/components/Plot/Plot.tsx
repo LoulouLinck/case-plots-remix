@@ -2,6 +2,7 @@ import React from "react";
 import locationIcon from '../img/location_icon.png';
 import sizeIcon from '../img/size_icon.png';
 import descriptionIcon from '../img/description_icon.png';
+import CurrencyDisplay from "../CurrencyDisplay/CurrencyDisplay"; // Importing CurrencyDisplay component
 
 // Interface for PlotProps
 // - 'plot' object includes all plot details such as title, size, price, location, and description.
@@ -43,10 +44,8 @@ const Plot: React.FC<PlotProps> = ({ plot, currency, conversionRate }) => {
         {plot.size} m²
       </p>
 
-      {/* Conditional rendering based on selected currency */}
       <p className="flex items-center mb-2">
-        <span className="mr-5">{currency === "USD" ? "$" : "€"}</span>
-        <span>{displayPrice.toLocaleString()}</span>
+        <CurrencyDisplay displayPrice={displayPrice} currency={currency} />
       </p>
 
       <p className="flex items-center mb-2">

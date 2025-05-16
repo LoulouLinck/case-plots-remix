@@ -8,6 +8,7 @@ import mooreIllustration from "./img/moore_illustration.png";
 import feldheckenIllustration from "./img/feldhecken_illustration.png";
 import waelderIllustration from "./img/waelder-illustration.png";
 import streuobstwiesenIllustration from "./img/streuobstwiesen_illusration.png";
+import CurrencyDisplay from "../CurrencyDisplay/CurrencyDisplay";
 
 const projectTypeImages: { [key in PlotType["projectType"]]: string } = {
   // Moore: "https://cdn.prod.website-files.com/65a509e09ca04e38935eece9/65aa677dc83cadddf5d1b408_Illustration_Oekosystem_Moor.webp", 
@@ -114,9 +115,8 @@ const PlotDetails: React.FC<PlotDetailsProps> = ({
               )}
 
               {/* Price with Symbols */}
-              <p className=" ">
-                <span className="mr-5">{currency === "USD" ? "$" : "€"}</span>
-                <span>{displayPrice.toLocaleString()}</span>
+              <p>
+                <CurrencyDisplay displayPrice={displayPrice} currency={currency} />
               </p>
             </div>
 

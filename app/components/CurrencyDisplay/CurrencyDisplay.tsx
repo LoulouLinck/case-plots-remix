@@ -10,9 +10,14 @@ const CurrencyDisplay: React.FC<CurrencyDisplayProps> = ({
   currency,
 }) => {
   return (
-    <span>
-      {currency === "USD" ? "$" : "€"} {displayPrice.toLocaleString()}
-    </span>
+    <p>
+      <span className="mr-5">
+        {currency === "USD" ? "$" : "€"}
+      </span>
+      <span>
+        {displayPrice.toLocaleString()}
+      </span>
+    </p>
   );
 };
 
